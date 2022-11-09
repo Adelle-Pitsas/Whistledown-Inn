@@ -34,5 +34,13 @@ describe('CustomerRepository', () => {
       id: 1,
       name: "Leatha Ullrich"
       })
-  });
+    });
+
+  it('should be able to find a customer by id', () => {
+    const getID = customerRepo.findCustomerByID(3)
+    expect(getID).to.deep.equal({
+      id: 3,
+      name: "Kelvin Schiller"
+      })
+  })
 });

@@ -4,4 +4,4 @@ class CustomerRepository {
   }
 }
 
-export default CustomerRepository;
+export default CustomerRepository

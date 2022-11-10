@@ -136,6 +136,8 @@ figure {
   cursor: pointer;
 }
 
+/* ----User Info---- */
+
 .user-info-container {
   width: 28%;
   margin-left: 2%;
@@ -144,6 +146,8 @@ figure {
   align-items: center;
   background-color: #60738095;
 }
+
+/* ---Cumulative Cost--- */
 
 .cumulative-cost-container {
   margin-top: 50px;
@@ -158,10 +162,13 @@ figure {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
+/* ---booking drop down--- */
+
 .bookings-dropdown {
   /* all: unset; */
   cursor: pointer;
   position: relative;
+  margin-top: 45px;
   border-radius: 10px;
   height: 50px;
   width: 250px;
@@ -210,4 +217,35 @@ figure {
     opacity: 1;
     transform: rotatex(0deg);
   }
+}
+
+.dropdown-container {
+  width: 250px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.bookings-header-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #f6fbfc8a;
+}
+
+.booking {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #f6fbfc8a;
+}
+
+.dropdown-header-date {
+  margin-left: 10px;
+}
+
+.booking-room {
+  margin-right: 30px;
 }

@@ -7,7 +7,7 @@ import Booking from '../src/Booking'
 const expect = chai.expect;
 
 describe('Hotel', () => {
-let room1, room2, room3, room4, booking1, booking2, roomsData, bookingsData, newHotel;
+let room1, room2, room3, room4, booking1, booking2, roomsData, bookingsData, newHotel, booking3, booking4;
 
 beforeEach(() => {
   room1 = rooms[0]
@@ -16,8 +16,10 @@ beforeEach(() => {
   room4 = rooms[3]
   booking1 = bookings[0]
   booking2 = bookings[1]
+  booking3 = bookings[2]
+  booking4 = bookings[3]
   roomsData = [room1, room2, room3, room4]
-  bookingsData = [booking1, booking2]
+  bookingsData = [booking1, booking2, booking3, booking4]
   newHotel = new Hotel(roomsData, bookingsData)
 })
 
@@ -68,6 +70,30 @@ beforeEach(() => {
   it('should contain a list of bookings that are instances of Booking', () => {
     expect(newHotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
+
+  it('should find a list of customers bookings', () => {
+    const findBookings = newHotel.findCustomerBookings(1)
+    expect(findBookings).to.deep.equal([
+      {
+        id: '5fwrgu4i7k55hl6t8',
+        userID: 1,
+        date: '2022/02/05',
+        roomNumber: 12
+      },
+      {
+        id: '5fwrgu4i7k55hl6x8',
+        userID: 1,
+        date: '2023/01/11',
+        roomNumber: 20
+      }
+    ])
+  })
+
+  it('should get the amount the customer has spent on rooms', () => {
+    const getAmount = newHotel.getCustomerTotalCost(1)
+    expect(getAmount).to.equal(516.04)
+  })
+
 
   it('should be able to get available rooms depending on the date', () => {
     const availableRooms = newHotel.getAvailableRooms("2022/02/05");

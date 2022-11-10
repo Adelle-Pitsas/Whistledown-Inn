@@ -19,6 +19,23 @@ class Hotel {
     })
   }
 
+  findCustomerBookings(customerID) {
+   return this.allBookings.filter((booking) => {
+      return booking.userID === customerID
+    })
+  }
+
+  getCustomerTotalCost(customerID) {
+    const totalBookings = this.findCustomerBookings(customerID);
+    return totalBookings.reduce((acc, booking) => {
+      const foundRoom = this.allRooms.find((room) => {
+        return room.number === booking.roomNumber
+      })
+      acc+=foundRoom.costPerNight;
+      return Math.round(acc * 100)/100
+    }, 0)
+  }
+
   getAvailableRooms(date) {
     const notAvailableRooms = this.allBookings
       .filter((booking) => {

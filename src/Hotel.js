@@ -32,7 +32,7 @@ class Hotel {
         return room.number === booking.roomNumber
       })
       acc+=foundRoom.costPerNight;
-      return acc
+      return Math.round(acc * 100)/100
     }, 0)
   }
 

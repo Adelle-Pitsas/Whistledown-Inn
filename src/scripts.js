@@ -10,16 +10,18 @@ import Customer from './Customer';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+//------QUERY SELECTORS------
+const cumulativeCost = document.getElementById('cumulativeCost')
+
+
 // ------GLOBAL VARIABLES------
-
-
 const store = {
-  hotelData: new Hotel(),
+  hotel: new Hotel(),
   customerRepo: new CustomerRepository(),
   bookingData: [],
   roomData: [],
   customersData: [],
-  customer: new Customer()
+  currentCustomer: new Customer()
 }
 
 // -------WINDOW LOAD FUNCTIONS------
@@ -28,9 +30,10 @@ function initializeApp() {
     .then((data) => {
       store.roomData = data.roomsData
       store.bookingData = data.bookingsData;
-      store.hotelData = new Hotel(store.roomData, store.bookingData)
+      store.hotel = new Hotel(store.roomData, store.bookingData)
       store.customerRepo = new CustomerRepository(data.customersData)
-      store.customer = getCustomer()
+      store.currentCustomer = getCustomer()
+      dashboardSetUp()
     })
 }
 
@@ -41,6 +44,16 @@ window.addEventListener('load', initializeApp)
 
 // ------EVENT HANDLERS------
 
+
+//------OTHER FUNCTIONS------
+function dashboardSetUp() {
+  getCumulativeCost()
+
+}
+
+function getCumulativeCost() {
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id)}`
+}
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {

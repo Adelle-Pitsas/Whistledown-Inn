@@ -6,6 +6,7 @@ import './css/styles.css';
 import CustomerRepository from './CustomerRepository';
 import Hotel from './Hotel';
 import getAllData from './Network-requests';
+import Customer from './Customer';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -17,7 +18,8 @@ const store = {
   customerRepo: new CustomerRepository(),
   bookingData: [],
   roomData: [],
-  customersData: []
+  customersData: [],
+  customer: new Customer()
 }
 
 // -------WINDOW LOAD FUNCTIONS------
@@ -27,9 +29,8 @@ function initializeApp() {
       store.roomData = data.roomsData
       store.bookingData = data.bookingsData;
       store.hotelData = new Hotel(store.roomData, store.bookingData)
-      store.customersData = data.customersData
-      store.customerRepo = new CustomerRepository(store.customersData)
-      doTheThing()
+      store.customerRepo = new CustomerRepository(data.customersData)
+      store.customer = getCustomer()
     })
 }
 
@@ -42,3 +43,6 @@ window.addEventListener('load', initializeApp)
 
 
 // ------UTILITY FUNCTIONS------
+function getCustomer() {
+  return store.customerRepo.findCustomerByID(1)
+}

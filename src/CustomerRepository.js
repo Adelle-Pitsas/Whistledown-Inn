@@ -1,8 +1,8 @@
 import Customer from "./Customer";
 
 class CustomerRepository {
-  constructor(allCustomerData) {
-    this.allCustomers = this.makeAllCustomers(allCustomerData) || [];
+  constructor(allCustomerData = []) {
+    this.allCustomers = this.makeAllCustomers(allCustomerData);
   }
 
   makeAllCustomers(data) {

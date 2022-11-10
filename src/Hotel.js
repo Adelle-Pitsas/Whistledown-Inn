@@ -2,9 +2,9 @@ import Room from "./Room";
 import Booking from "./Booking";
 
 class Hotel {
-  constructor(roomsData, bookingsData) {
-    this.allRooms = this.makeNewRooms(roomsData) || [];
-    this.allBookings = this.makeNewBookings(bookingsData) || [];
+  constructor(roomsData = [], bookingsData = []) {
+    this.allRooms = this.makeNewRooms(roomsData);
+    this.allBookings = this.makeNewBookings(bookingsData);
   }
 
   makeNewRooms(roomsData) {

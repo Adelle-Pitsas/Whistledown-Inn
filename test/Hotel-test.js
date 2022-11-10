@@ -40,6 +40,12 @@ beforeEach(() => {
       })
   })
 
+  it('should contain a empty list of rooms if there is no room data', () => {
+    const emptyRoomsData = []
+    const newHotel2 = new Hotel(emptyRoomsData, bookingsData)
+    expect(newHotel2.allRooms).to.deep.equal([])
+  })
+
   it('should contain a list of rooms that are instances of Room', () => {
     expect(newHotel.allRooms[0]).to.be.an.instanceOf(Room)
   })
@@ -51,6 +57,12 @@ beforeEach(() => {
       date: "2022/02/05",
       roomNumber: 12
       })
+  })
+
+  it('should contain an empty list of bookings if there is no booking data', () => {
+    const emptyBookingsData = []
+    const newHotel3 = new Hotel(roomsData, emptyBookingsData)
+    expect(newHotel3.allBookings).to.deep.equal([])
   })
 
   it('should contain a list of bookings that are instances of Booking', () => {

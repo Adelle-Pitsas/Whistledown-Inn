@@ -38,6 +38,12 @@ describe('CustomerRepository', () => {
       })
     });
 
+  it('should have an empty list of customers if there is no customer data', () => {
+    const emptyCustomerData = []
+    const customerRepo2 = new CustomerRepository(emptyCustomerData)
+    expect(customerRepo2.allCustomers).to.deep.equal([])
+  })
+
   it('should be able to find a customer by id', () => {
     const getID = customerRepo.findCustomerByID(2)
     expect(getID).to.deep.equal({

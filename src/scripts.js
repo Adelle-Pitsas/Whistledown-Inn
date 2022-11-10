@@ -76,10 +76,11 @@ function toggleBookingsDisplay() {
 }
 
 function displayCustomerBookings() {
+
   bookingContainer.innerHTML = `
   <div class="bookings-header-container">
     <h4 class="dropdown-header-date">Date</h4>
-    <h4 class="dropdown-header-date">Room Number</h4>
+    <h4 class="dropdown-header-room-number">Room Number</h4>
   </div>
   `;
   store.hotel.findCustomerBookings(store.currentCustomer.id).forEach((booking) => {

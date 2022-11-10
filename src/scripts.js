@@ -12,6 +12,10 @@ import Customer from './Customer';
 import './images/turing-logo.png'
 //------QUERY SELECTORS------
 const cumulativeCost = document.getElementById('cumulativeCost')
+const bookingDropDown = document.getElementById('bookingDropDown')
+const bookings = document.getElementById('bookings')
+const dropDownArrow = document.querySelector('.dropdown-arrow')
+const bookingContainer = document.getElementById('dropdownContainer')
 
 
 // ------GLOBAL VARIABLES------
@@ -33,6 +37,7 @@ function initializeApp() {
       store.hotel = new Hotel(store.roomData, store.bookingData)
       store.customerRepo = new CustomerRepository(data.customersData)
       store.currentCustomer = getCustomer()
+      initializeEventListeners()
       dashboardSetUp()
     })
 }
@@ -41,19 +46,52 @@ function initializeApp() {
 // ------EVENT LISTENERS------
 window.addEventListener('load', initializeApp)
 
+function initializeEventListeners() {
+  
+  bookingDropDown.addEventListener('click', toggleBookingsDisplay)
+}
 
-// ------EVENT HANDLERS------
 
 
-//------OTHER FUNCTIONS------
+// ------EVENT HANDLERS/FUNCTIONS------
 function dashboardSetUp() {
   getCumulativeCost()
-
 }
 
 function getCumulativeCost() {
   cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id)}`
 }
+
+function toggleBookingsDisplay() {
+  bookings.classList.toggle('bookings-open')
+  dropDownArrow.classList.toggle('dropdown-arrow-open');
+  if(bookings.classList.contains('bookings-open')) {
+    bookings.ariaExpanded = 'true';
+    displayCustomerBookings()
+  } else {
+    bookings.ariaExpanded = 'false';
+    bookingContainer.innerHTML = ''
+  }
+
+}
+
+function displayCustomerBookings() {
+  bookingContainer.innerHTML = `
+  <div class="bookings-header-container">
+    <h4 class="dropdown-header-date">Date</h4>
+    <h4 class="dropdown-header-date">Room Number</h4>
+  </div>
+  `;
+  store.hotel.findCustomerBookings(store.currentCustomer.id).forEach((booking) => {
+    bookingContainer.innerHTML += `
+    <div class="booking">
+      <p class="booking-date">${booking.date}</p>
+      <p class="booking-room">${booking.roomNumber}</p>
+    </div>
+    `
+  })
+}
+
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {

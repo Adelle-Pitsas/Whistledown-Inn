@@ -103,7 +103,7 @@ function setUpCustomerDashboard() {
 }
 
 function getCumulativeCost() {
-  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id)}`
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id, getCurrentDate())}`
 }
 
 function toggleUpcomingBookingsDisplay() {
@@ -135,7 +135,8 @@ function displayCustomerBookings(containerElement, bookings, bookingContainer) {
   containerElement.innerHTML = `
   <div class="bookings-header-container">
     <h4 class="dropdown-header-date">Date</h4>
-    <h4 class="dropdown-header-room-number">Room Number</h4>
+    <h4 class="dropdown-header-room-number">Room<br>Number</h4>
+    <h4 class="dropdown-header-cost">Cost</h4>
   </div>
   `;
   bookings.forEach((booking) => {
@@ -143,6 +144,7 @@ function displayCustomerBookings(containerElement, bookings, bookingContainer) {
     <div class="booking">
       <p class="booking-date">${booking.date}</p>
       <p class="booking-room">${booking.roomNumber}</p>
+      <p class="booking-cost">$${store.hotel.getRoomCost(booking.roomNumber)}
     </div>
     `
   })

@@ -60,7 +60,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   background-color: #60738095;
-  width: 70%;
+  width: 60%;
 }
 
 .booking-banner {
@@ -177,7 +177,7 @@ figure {
 /* ----User Info---- */
 
 .user-info-container {
-  width: 28%;
+  width: 38%;
   margin-left: 2%;
   display: flex;
   flex-direction: column;
@@ -200,7 +200,18 @@ figure {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
+.booking-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
 /* ---booking drop down--- */
+/* .previous-booking-dropdown-container,
+.upcoming-booking-dropdown-container {
+  
+} */
+
 
 .previous-bookings-dropdown,
 .upcoming-bookings-dropdown {
@@ -210,7 +221,7 @@ figure {
   margin-top: 45px;
   border-radius: 10px;
   height: 50px;
-  width: 250px;
+  width: 260px;
   font-size: 18px;
   background-color: #607380;
   color: aliceblue;
@@ -279,12 +290,16 @@ figure {
 
 .previous-dropdown-container,
 .upcoming-dropdown-container {
-  width: 250px;
+  width: 260px;
   height: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+}
+
+.dropdown-header-room-number {
+  text-align: center;
 }
 
 .bookings-header-container {

@@ -5,7 +5,7 @@
 import './css/styles.css';
 import CustomerRepository from './CustomerRepository';
 import Hotel from './Hotel';
-import getAllData from './Network-requests';
+import { getAllData, postBooking } from './Network-requests';
 import Customer from './Customer';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
@@ -20,7 +20,8 @@ const datePicker = document.getElementById('datePicker')
 const roomTypePicker = document.getElementById('roomTypeSelect')
 const submitButton = document.getElementById('submitSearchButton')
 const chooseDateError = document.getElementById('chooseDateError')
-const availableRoomsContainer = document.getElementById('availableRoomsContainer')
+const availableRooms = document.getElementById('availableRooms')
+const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 
 
 
@@ -45,6 +46,17 @@ function initializeApp() {
       store.currentCustomer = getCustomer()
       initializeEventListeners()
       setUpCustomerDashboard()
+      // console.log(store.bookingData)
+
+    })
+}
+//------ NETWORK REQUEST FUNCTIONS------
+function createNewBooking(userID, date, roomNumber) {
+  console.log(date)
+  postBooking(userID, date, roomNumber)
+    .then(data => console.log(data))
+    .catch((err) => {
+      console.error('CATCH ERROR', err);
     })
 }
 
@@ -57,8 +69,10 @@ function initializeEventListeners() {
   bookingDropDown.addEventListener('click', toggleBookingsDisplay)
 
   submitButton.addEventListener('click', searchFilter)
+
 }
 
+availableRooms.addEventListener('click', bookRoom)
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
@@ -112,18 +126,21 @@ function getRoomTypeDisplay(roomTypes) {
 
 function searchFilter() {
   if(datePicker.value && roomTypePicker.value==='default-select') {
-    displayAvailableRooms(store.hotel.getAvailableRooms(datePicker.value))
+    const date = formatDate(datePicker.value)
+    displayAvailableRooms(store.hotel.getAvailableRooms(date))
   } else if(datePicker.value && roomTypePicker !== 'default-select') {
-    displayAvailableRooms(store.hotel.filterByRoomType(datePicker.value, roomTypePicker.value))
+    const date = formatDate(datePicker.vale)
+    displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
   }
 }
 
 function displayAvailableRooms(rooms) {
-  availableRoomsContainer.innerHTML = ''
+  show(availableRoomsHeader)
+  availableRooms.innerHTML = ''
   rooms.forEach((room) => {
-    availableRoomsContainer.innerHTML+= `
+    availableRooms.innerHTML+= `
       <section class="room-card" id="roomCard">
         <figure class="picture">
           <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
@@ -135,10 +152,16 @@ function displayAvailableRooms(rooms) {
           <p class="examplenumber-of-beds">Number of beds: ${room.numBeds}</p>
           <p class="example-cost-per-night">$${room.costPerNight}</p>
         </section>
-        <button class="book-room-button">BOOK ROOM</button>
+        <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
       </section>
     `
   })  
+}
+
+function bookRoom(event) {
+  const date = formatDate(datePicker.value)
+  createNewBooking(store.currentCustomer.id, date, event.target.id)
+
 }
 
 
@@ -153,4 +176,8 @@ function hide(element) {
 
 function show(element) {
   element.classList.remove('hidden')
+}
+
+function formatDate(date) {
+  return date.split('-').join('/')
 }

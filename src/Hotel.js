@@ -65,6 +65,11 @@ class Hotel {
       return room.roomType === roomType
     })
   }
+
+  addNewBooking(bookingInfo) {
+    const newBooking = new Booking(bookingInfo)
+    this.allBookings.push(newBooking)
+  }
 }
 
 export default Hotel

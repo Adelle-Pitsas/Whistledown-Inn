@@ -7,7 +7,7 @@ import Booking from '../src/Booking'
 const expect = chai.expect;
 
 describe('Hotel', () => {
-let room1, room2, room3, room4, booking1, booking2, roomsData, bookingsData, newHotel, booking3, booking4;
+let room1, room2, room3, room4, booking1, booking2, roomsData, bookingsData, newHotel, booking3, booking4, date;
 
 beforeEach(() => {
   room1 = rooms[0]
@@ -21,6 +21,7 @@ beforeEach(() => {
   roomsData = [room1, room2, room3, room4]
   bookingsData = [booking1, booking2, booking3, booking4]
   newHotel = new Hotel(roomsData, bookingsData)
+  date = "2022/11/23"
 })
 
   it('should be a function', () => {
@@ -76,15 +77,9 @@ beforeEach(() => {
     expect(roomTypes).to.deep.equal(["single room", "junior suite", "residential suite"])
   })
 
-  it('should find a list of customers bookings', () => {
-    const findBookings = newHotel.findCustomerBookings(1)
+  it('should find a list of customers\' upcoming bookings', () => {
+    const findBookings = newHotel.findUpcomingCustomerBookings(1, date)
     expect(findBookings).to.deep.equal([
-      {
-        id: '5fwrgu4i7k55hl6t8',
-        userID: 1,
-        date: '2022/02/05',
-        roomNumber: 12
-      },
       {
         id: '5fwrgu4i7k55hl6x8',
         userID: 1,
@@ -94,8 +89,20 @@ beforeEach(() => {
     ])
   })
 
+  it('should find a list of customers\ previous bookings', () => {
+    const findBookings = newHotel.findPreviousCustomerBookings(1, date);
+    expect(findBookings).to.deep.equal([ 
+      {
+        id: '5fwrgu4i7k55hl6t8',
+        userID: 1,
+        date: '2022/02/05',
+        roomNumber: 12
+      }
+    ])
+  })
+
   it('should get the amount the customer has spent on rooms', () => {
-    const getAmount = newHotel.getCustomerTotalCost(1)
+    const getAmount = newHotel.getCustomerTotalCost(1, date)
     expect(getAmount).to.equal(516.04)
   })
 

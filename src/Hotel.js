@@ -41,15 +41,14 @@ class Hotel {
   }
 
 
-  getCustomerTotalCost(customerID) {
+  getCustomerTotalCost(customerID, currentDate) {
     const totalBookings = []
-    this.findUpcomingCustomerBookings(customerID).forEach((booking) => {
+    this.findUpcomingCustomerBookings(customerID, currentDate).forEach((booking) => {
       totalBookings.push(booking)
     })
-    this.findPreviousCustomerBookings(customerID).forEach((booking) => {
+    this.findPreviousCustomerBookings(customerID, currentDate).forEach((booking) => {
       totalBookings.push(booking)
     })
-    this.findUpcomingCustomerBookings(customerID)
     return totalBookings.reduce((acc, booking) => {
       const foundRoom = this.allRooms.find((room) => {
         return room.number === booking.roomNumber

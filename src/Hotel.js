@@ -19,11 +19,21 @@ class Hotel {
     })
   }
 
+  getRoomTypes() {
+    return this.allRooms.reduce((acc, room) => {
+      if(!acc.includes(room.roomType)) {
+        acc.push(room.roomType)
+      }
+      return acc
+    }, [])
+  }
+
   findCustomerBookings(customerID) {
    return this.allBookings.filter((booking) => {
       return booking.userID === customerID
     })
   }
+
 
   getCustomerTotalCost(customerID) {
     const totalBookings = this.findCustomerBookings(customerID);

@@ -71,6 +71,11 @@ beforeEach(() => {
     expect(newHotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 
+  it('should have a list of unique room types', () => {
+    const roomTypes = newHotel.getRoomTypes()
+    expect(roomTypes).to.deep.equal(["single room", "junior suite", "residential suite"])
+  })
+
   it('should find a list of customers bookings', () => {
     const findBookings = newHotel.findCustomerBookings(1)
     expect(findBookings).to.deep.equal([

@@ -202,7 +202,8 @@ figure {
 
 /* ---booking drop down--- */
 
-.bookings-dropdown {
+.previous-bookings-dropdown,
+.upcoming-bookings-dropdown {
   /* all: unset; */
   cursor: pointer;
   position: relative;
@@ -216,7 +217,8 @@ figure {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
-.dropdown-arrow {
+.previous-dropdown-arrow,
+.upcoming-dropdown-arrow {
   display: inline-block;
   position: relative;
   border-bottom: 2px solid #fff;
@@ -230,17 +232,35 @@ figure {
   color: black;
 }
 
-.dropdown-arrow-open {
+.previous-dropdown-arrow-open,
+.upcoming-dropdown-arrow-open {
   transform: rotate(-135deg);
   top: 3px;
 }
 
-.bookings-dropdown:hover:hover {
+.previous-bookings-dropdown:hover,
+.upcoming-bookings-dropdown:hover {
   filter: brightness(150%);
 }
 
-.bookings-dropdown:active {
+.previous-bookings-dropdown:active,
+.upcoming-bookings-dropdown:active {
   top: 1px;
+}
+
+
+@keyframes dropdown-open {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+  50% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotatex(0deg);
+  }
 }
 
 @keyframes dropdown-open {
@@ -257,7 +277,8 @@ figure {
   }
 }
 
-.dropdown-container {
+.previous-dropdown-container,
+.upcoming-dropdown-container {
   width: 250px;
   height: 700px;
   display: flex;
@@ -280,7 +301,7 @@ figure {
   background-color: #f6fbfc8a;
 }
 
-.dropdown-header-date {
+.header-date {
   margin-left: 10px;
 }
 

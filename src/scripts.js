@@ -26,6 +26,7 @@ const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const successDismissButton = document.getElementById('successDismissButton')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
+const networkErrorPopup =document.getElementById('networkError')
 
 
 
@@ -67,6 +68,8 @@ function createNewBooking(userID, date, roomNumber) {
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
+      show(networkErrorPopup)
+      blur(allContent)
     })
 }
 

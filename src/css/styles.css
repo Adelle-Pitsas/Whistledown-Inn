@@ -295,6 +295,7 @@ figure {
   font-size: 14px;
 }
 
+.network-error,
 .no-dates-available,
 .book-room-success {
   display: flex;
@@ -311,6 +312,11 @@ figure {
   left:calc(50% - 225px);
 }
 
+.alert-icon {
+  width: 50px;
+  height: 50px;
+}
+
 .dismiss {
   bottom: 0;
   margin-top: 20px;
@@ -324,6 +330,13 @@ figure {
   cursor: pointer;
 }
 
+.dismiss-error {
+  background-color: #ef6f6f;
+  border: #e3a2a2;
+
+}
+
+.error-text,
 .no-date-text,
 .confirmation-text {
   text-align: center;

@@ -34,7 +34,6 @@ const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
 
 
-
 // ------GLOBAL VARIABLES------
 const store = {
   hotel: new Hotel(),
@@ -112,7 +111,7 @@ function toggleUpcomingBookingsDisplay() {
   upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
   if(upcomingBookings.classList.contains('bookings-open')) {
     upcomingBookings.ariaExpanded = 'true';
-    displayCustomerBookings(upcomingBookingContainer)
+    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, getCurrentDate()), upcomingBookingContainer)
   } else {
     upcomingBookings.ariaExpanded = 'false';
     upcomingBookingContainer.innerHTML = ''
@@ -124,7 +123,7 @@ function togglePreviousBookingsDisplay() {
   previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
   if(previousBookings.classList.contains('bookings-open')) {
     previousBookings.ariaExpanded = 'true';
-    displayCustomerBookings(previousBookingContainer)
+    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, getCurrentDate()), previousBookingContainer)
   } else {
     previousBookings.ariaExpanded = 'false';
     previousBookingContainer.innerHTML = ''
@@ -132,15 +131,15 @@ function togglePreviousBookingsDisplay() {
 }
 
 
-function displayCustomerBookings(containerElement) {
+function displayCustomerBookings(containerElement, bookings, bookingContainer) {
   containerElement.innerHTML = `
   <div class="bookings-header-container">
     <h4 class="dropdown-header-date">Date</h4>
     <h4 class="dropdown-header-room-number">Room Number</h4>
   </div>
   `;
-  store.hotel.findCustomerBookings(store.currentCustomer.id).forEach((booking) => {
-    upcomingBookingContainer.innerHTML += `
+  bookings.forEach((booking) => {
+    bookingContainer.innerHTML += `
     <div class="booking">
       <p class="booking-date">${booking.date}</p>
       <p class="booking-room">${booking.roomNumber}</p>
@@ -216,7 +215,7 @@ function closeMessage(event) {
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
-  return store.customerRepo.findCustomerByID(1)
+  return store.customerRepo.findCustomerByID(13)
 }
 
 function hide(element) {
@@ -237,4 +236,12 @@ function removeBlur(element) {
 
 function formatDate(date) {
   return date.split('-').join('/')
+}
+
+function getCurrentDate() {
+  const date = new Date()
+  let year = date.getFullYear()
+  let month = date.getMonth() + 1
+  let day = date.getDate()
+  return `${year}/${month}/${day}`
 }

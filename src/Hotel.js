@@ -28,6 +28,13 @@ class Hotel {
     }, [])
   }
 
+  getRoomCost(roomNumber) {
+    const foundRoom = this.allRooms.find((room) => {
+      return room.number === roomNumber
+    })
+    return foundRoom.costPerNight
+  }
+
   findUpcomingCustomerBookings(customerID, currentDate) {
    return this.allBookings.filter((booking) => {
       return booking.userID === customerID && booking.date >= currentDate

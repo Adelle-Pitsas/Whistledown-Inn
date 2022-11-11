@@ -77,6 +77,11 @@ beforeEach(() => {
     expect(roomTypes).to.deep.equal(["single room", "junior suite", "residential suite"])
   })
 
+  it('should return a room cost based on the room number', () => {
+    const roomCost = newHotel.getRoomCost(12)
+    expect(roomCost).to.equal(172.09)
+  })
+
   it('should find a list of customers\' upcoming bookings', () => {
     const findBookings = newHotel.findUpcomingCustomerBookings(1, date)
     expect(findBookings).to.deep.equal([

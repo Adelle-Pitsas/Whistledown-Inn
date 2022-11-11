@@ -71,6 +71,11 @@ beforeEach(() => {
     expect(newHotel.allBookings[0]).to.be.an.instanceOf(Booking)
   })
 
+  it('should have a list of unique room types', () => {
+    const roomTypes = newHotel.getRoomTypes()
+    expect(roomTypes).to.deep.equal(["single room", "junior suite", "residential suite"])
+  })
+
   it('should find a list of customers bookings', () => {
     const findBookings = newHotel.findCustomerBookings(1)
     expect(findBookings).to.deep.equal([
@@ -135,5 +140,21 @@ beforeEach(() => {
         numBeds: 1,
         costPerNight: 200.39
       }])
+  })
+
+  it('should be able to add a new booking to its list of bookings', () => {
+    const bookingInfo = {
+      id: "1668200085872",
+      userID: 1,
+      date: "2022/11/15",
+      roomNumber: 1
+    }
+    newHotel.addNewBooking(bookingInfo)
+    expect(newHotel.allBookings.reverse()[0]).to.deep.equal({
+      id: "1668200085872",
+      userID: 1,
+      date: "2022/11/15",
+      roomNumber: 1
+    })
   })
 });

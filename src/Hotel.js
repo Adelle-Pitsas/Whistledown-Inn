@@ -19,11 +19,21 @@ class Hotel {
     })
   }
 
+  getRoomTypes() {
+    return this.allRooms.reduce((acc, room) => {
+      if(!acc.includes(room.roomType)) {
+        acc.push(room.roomType)
+      }
+      return acc
+    }, [])
+  }
+
   findCustomerBookings(customerID) {
    return this.allBookings.filter((booking) => {
       return booking.userID === customerID
     })
   }
+
 
   getCustomerTotalCost(customerID) {
     const totalBookings = this.findCustomerBookings(customerID);
@@ -54,6 +64,11 @@ class Hotel {
     return availableRooms.filter((room) => {
       return room.roomType === roomType
     })
+  }
+
+  addNewBooking(bookingInfo) {
+    const newBooking = new Booking(bookingInfo)
+    this.allBookings.push(newBooking)
   }
 }
 

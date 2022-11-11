@@ -16,105 +16,24 @@
       <section class="booking-section" id="bookingSection">
         <h2 class="booking-banner" id="bookingBanner"> Make a Booking</h2>
         <section class="booking-selection-container" id="bookingSelectionContainer">
-          <label class="data-picker-label" id="dataPickerLabel">
+          <label class="date-picker-label" id="datePickerLabel">
             Choose a date:
-            <input type="date" name="booking" min="2022-11-08"/>
+            <input class="date-picker" id="datePicker" type="date" name="booking" min="2022-11-08"/>
+            <p class="choose-date-error hidden" id="chooseDateError">Please Choose a Date</p>
           </label>
           <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
-            Choose a room type
-            <select id="roomTypeSelect">
+            Choose a room type:
+            <select id="roomTypeSelect" class="room-type-select">
               <option value="default-select">Choose an option</option>
-              <option value="room1">room 1</option>
+              <option value="residential suite">residential suite</option>
               <!-- these will be dynamic -->
-            <select/>
-          </label>
+              <select/>
+            </label>
+          <button class="submit-search-button" id="submitSearchButton">Search</button>
         </section>
         <section class="available-rooms-container" id="availableRoomsContainer">
-          <h2 class="available-rooms-header"></h2>
-          <!-- cards will be dynamically created -->
-          <section class="example-room" id="exampleRoom1">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
-
-          <section class="example-room" id="exampleRoom2">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
-
-          <section class="example-room" id="exampleRoom3">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
-
-          <section class="example-room" id="exampleRoom4">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
-
-          <section class="example-room" id="exampleRoom5">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
-
-          <section class="example-room" id="exampleRoom6">
-            <figure class="picture">
-              <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-            </figure>
-            <section class="example-room-details">
-              <p class="exampleroom-number">1</p>
-              <p class="exapmeroom-type">Suite</p>
-              <p class="examplebed-size">Queen</p>
-              <p class="examplenumber-of-beds">1</p>
-              <p class="example-cost-per-night">350.95</p>
-            </section>
-            <button class="examplebook-room-button">BOOK ROOM</button>
-          </section>
+          <h2 class="available-rooms-header">Available Rooms</h2>
+          <!-- Dynamically created room cards go here  -->
         </section>
       </section>
       <section class="user-info-container" id="userInfoContainer">
@@ -129,9 +48,7 @@
         <div class="bookings" id="bookings" aria-expanded="false">
           <div class="dropdown-container" id="dropdownContainer"></div>
         </div>
-
       </section>
-      
     </section>
   </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

@@ -11,6 +11,7 @@ import Customer from './Customer';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 //------QUERY SELECTORS------
+const allContent = document.querySelector('.all-content')
 const cumulativeCost = document.getElementById('cumulativeCost')
 const bookingDropDown = document.getElementById('bookingDropDown')
 const bookings = document.getElementById('bookings')
@@ -22,6 +23,9 @@ const submitButton = document.getElementById('submitSearchButton')
 const chooseDateError = document.getElementById('chooseDateError')
 const availableRooms = document.getElementById('availableRooms')
 const availableRoomsHeader = document.getElementById('availableRoomsHeader')
+const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
+const successDismissButton = document.getElementById('successDismissButton')
+const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 
 
 
@@ -54,7 +58,12 @@ function initializeApp() {
 function createNewBooking(userID, date, roomNumber) {
   console.log(date)
   postBooking(userID, date, roomNumber)
-    .then(data => console.log(data))
+    .then((data) => {
+      console.log("Is it getting here?")
+      console.log(data)
+      show(bookRoomSuccessPopup)
+      blur(allContent)
+    })
     .catch((err) => {
       console.error('CATCH ERROR', err);
     })
@@ -73,6 +82,8 @@ function initializeEventListeners() {
 }
 
 availableRooms.addEventListener('click', bookRoom)
+
+window.addEventListener('click', closeMessage)
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
@@ -129,7 +140,7 @@ function searchFilter() {
     const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.getAvailableRooms(date))
   } else if(datePicker.value && roomTypePicker !== 'default-select') {
-    const date = formatDate(datePicker.vale)
+    const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
@@ -137,25 +148,29 @@ function searchFilter() {
 }
 
 function displayAvailableRooms(rooms) {
-  show(availableRoomsHeader)
-  availableRooms.innerHTML = ''
-  rooms.forEach((room) => {
-    availableRooms.innerHTML+= `
-      <section class="room-card" id="roomCard">
-        <figure class="picture">
-          <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
-        </figure>
-        <section class="room-details">
-          <p class="room-number">Room Number: ${room.number}</p>
-          <p class="room-type">${room.roomType}</p>
-          <p class="bed-size">${room.bedSize}</p>
-          <p class="examplenumber-of-beds">Number of beds: ${room.numBeds}</p>
-          <p class="example-cost-per-night">$${room.costPerNight}</p>
+  if(!rooms.length) {
+    displayApology()
+  } else {
+    show(availableRoomsHeader)
+    availableRooms.innerHTML = ''
+    rooms.forEach((room) => {
+      availableRooms.innerHTML+= `
+        <section class="room-card" id="roomCard">
+          <figure class="picture">
+            <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
+          </figure>
+          <section class="room-details">
+            <p class="room-number">Room Number: ${room.number}</p>
+            <p class="room-type">${room.roomType}</p>
+            <p class="bed-size">${room.bedSize}</p>
+            <p class="examplenumber-of-beds">Number of beds: ${room.numBeds}</p>
+            <p class="example-cost-per-night">$${room.costPerNight}</p>
+          </section>
+          <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>
-        <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
-      </section>
-    `
-  })  
+      `
+    }) 
+  } 
 }
 
 function bookRoom(event) {
@@ -164,6 +179,17 @@ function bookRoom(event) {
 
 }
 
+function displayApology() {
+  show(noDateAvailablePopup)
+}
+
+
+function closeMessage(event) {
+  if(event.target.classList.contains('dismiss')) {
+  hide(event.target.parentNode)
+  removeBlur(allContent)
+  }
+}
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
@@ -176,6 +202,14 @@ function hide(element) {
 
 function show(element) {
   element.classList.remove('hidden')
+}
+
+function blur(element) {
+  element.classList.add('blur-filter')
+}
+
+function removeBlur(element) {
+  element.classList.remove('blur-filter')
 }
 
 function formatDate(date) {

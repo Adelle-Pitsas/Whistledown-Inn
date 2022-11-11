@@ -1,15 +1,15 @@
 html {
   position: relative;
   margin: 0px;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 }
 
 body {
   background: #fff9d4;
   margin: 0px;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 
 /* ----Banner---- */
@@ -21,17 +21,17 @@ header {
   top: 0px;
   left: 0px;;
   width: 100%;
-  height: 105px;
+  height: 225px;
   display: flex;
   align-items: center;
   justify-content: center;
   /* that will need to change when I add more */
-  background-color: #798075a2;
+  background-color: #cfb975;
   
 }
 
 .logo {
-  height: 80%;
+  height: 100%;
 }
 
 
@@ -46,7 +46,7 @@ header {
 
 
 h1 {
-  margin-top: 165px;
+  margin-top: 275px;
 }
 
 .main {
@@ -116,12 +116,13 @@ h1 {
   filter: brightness(150%);
 }
 
-.available-rooms-container {
+.available-rooms-container,
+.available-rooms {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 1130px;
+  width: 800px;
 }
 
 
@@ -294,8 +295,55 @@ figure {
   font-size: 14px;
 }
 
+.no-dates-available,
+.book-room-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 500px;
+  height: auto;
+  position: fixed;
+  border-radius: 10px;
+  padding-top: 10px;
+  z-index: 9999;
+  top: calc(50% - 225px);
+  left:calc(50% - 225px);
+}
+
+.dismiss {
+  bottom: 0;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  background-color: #efd46f;
+  border: #dfd0b5;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+}
+
+.no-date-text,
+.confirmation-text {
+  text-align: center;
+  font-size: 19px;
+}
+
+.dismiss:hover {
+  filter: brightness(110%);
+}
 
 /* ----Utility---- */
 .hidden {
   display: none;
+}
+
+
+.blur-filter {
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
 }

@@ -7,49 +7,71 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <header>
-    <img class="logo" src="./images/turing-logo.png" alt="turing logo">
-  </header>
-  <section class="main-content">
-    <h1 class= "welcome-message" id="welcomeMessage">Welcome Back!</h1>
-    <section class="main" id="main">
-      <section class="booking-section" id="bookingSection">
-        <h2 class="booking-banner" id="bookingBanner"> Make a Booking</h2>
-        <section class="booking-selection-container" id="bookingSelectionContainer">
-          <label class="date-picker-label" id="datePickerLabel">
-            Choose a date:
-            <input class="date-picker" id="datePicker" type="date" name="booking" min="2022-11-08"/>
-            <p class="choose-date-error hidden" id="chooseDateError">Please Choose a Date</p>
-          </label>
-          <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
-            Choose a room type:
-            <select id="roomTypeSelect" class="room-type-select">
-              <!-- Dynamically created options -->
-              <select/>
+  <section class="all-content">
+    <header>
+      <img class="logo" src="Wistledown-logo.png" alt="turing logo">
+    </header>
+    <section class="main-content">
+      <h1 class= "welcome-message" id="welcomeMessage">Welcome Back!</h1>
+      <section class="main" id="main">
+        <section class="booking-section" id="bookingSection">
+          <h2 class="booking-banner" id="bookingBanner"> Make a Booking</h2>
+          <section class="booking-selection-container" id="bookingSelectionContainer">
+            <label class="date-picker-label" id="datePickerLabel">
+              Choose a date:
+              <input class="date-picker" id="datePicker" type="date" name="booking" min="2022-11-08"/>
+              <p class="choose-date-error hidden" id="chooseDateError">Please Choose a Date</p>
             </label>
-          <button class="submit-search-button" id="submitSearchButton">Search</button>
+            <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
+              Choose a room type:
+              <select id="roomTypeSelect" class="room-type-select">
+                <!-- Dynamically created options -->
+                <select/>
+              </label>
+            <button class="submit-search-button" id="submitSearchButton">Search</button>
+          </section>
+          <section class="available-rooms-container" id="availableRoomsContainer">
+            <h2 class="available-rooms-header hidden" id="availableRoomsHeader">Available Rooms</h2>
+            <div class="available-rooms" id="availableRooms">
+
+            </div>
+            <!-- Dynamically created room cards go here  -->
+          </section>
         </section>
-        <section class="available-rooms-container" id="availableRoomsContainer">
-          <h2 class="available-rooms-header">Available Rooms</h2>
-          <!-- Dynamically created room cards go here  -->
+        <section class="user-info-container" id="userInfoContainer">
+          <div class="cumulative-cost-container" id="cumulativeCostContainer">
+            <h3>Cumulative Cost</h3>
+            <p class="cumulative-cost" id="cumulativeCost">$----.--</p>
+          </div>
+          <button class="bookings-dropdown" id="bookingDropDown">
+            Your Bookings
+            <div class="dropdown-arrow"></div>
+          </button>
+          <div class="bookings" id="bookings" aria-expanded="false">
+            <div class="dropdown-container" id="dropdownContainer"></div>
+          </div>
         </section>
-      </section>
-      <section class="user-info-container" id="userInfoContainer">
-        <div class="cumulative-cost-container" id="cumulativeCostContainer">
-          <h3>Cumulative Cost</h3>
-          <p class="cumulative-cost" id="cumulativeCost">$----.--</p>
-        </div>
-        <button class="bookings-dropdown" id="bookingDropDown">
-          Your Bookings
-          <div class="dropdown-arrow"></div>
-        </button>
-        <div class="bookings" id="bookings" aria-expanded="false">
-          <div class="dropdown-container" id="dropdownContainer"></div>
-        </div>
       </section>
     </section>
   </section>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <section class="book-room-success hidden" id="bookRoomSuccess">
+    <img src="silouette.png" class="wistledown-silhouette" alt="Lady Wistledown's silouette">
+    <div class="confirmation-text">
+      <p>We received your request and made your reservation!</p>
+      <p>Check your upcoming bookings to confirm reservation </p>
+    </div>
+    <button class="dismiss" id="successDismissButton">Dismiss</button>
+  </section>
+  <section class="no-dates-available hidden" id="noDatesAvailable">
+    <img src="bee-image.png" class="bee-image" alt="image of a bee">
+    <div class="no-date-text">
+      <p>SO SORRY!!</p>
+      <p>There are no rooms available for the dates you selected</p>
+      <p>Please choose another date and try again</p>
+    </div>
+    <button class="dismiss" id="noDateDismissButton">Dismiss</button>
+  </section>
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
 </body>

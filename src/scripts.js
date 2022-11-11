@@ -44,7 +44,7 @@ function initializeApp() {
       store.customerRepo = new CustomerRepository(data.customersData)
       store.currentCustomer = getCustomer()
       initializeEventListeners()
-      dashboardSetUp()
+      setUpCustomerDashboard()
     })
 }
 
@@ -62,8 +62,9 @@ function initializeEventListeners() {
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
-function dashboardSetUp() {
-  getCumulativeCost()
+function setUpCustomerDashboard() {
+  getCumulativeCost();
+  getRoomTypeDisplay(store.hotel.getRoomTypes());
 }
 
 function getCumulativeCost() {
@@ -84,7 +85,6 @@ function toggleBookingsDisplay() {
 }
 
 function displayCustomerBookings() {
-
   bookingContainer.innerHTML = `
   <div class="bookings-header-container">
     <h4 class="dropdown-header-date">Date</h4>
@@ -97,6 +97,15 @@ function displayCustomerBookings() {
       <p class="booking-date">${booking.date}</p>
       <p class="booking-room">${booking.roomNumber}</p>
     </div>
+    `
+  })
+}
+
+function getRoomTypeDisplay(roomTypes) {
+  roomTypePicker.innerHTML = `<option value="default-select">Choose an option</option>`
+  roomTypes.forEach((roomType) => {
+    roomTypePicker.innerHTML += `
+      <option value="${roomType}">${roomType}</option>
     `
   })
 }

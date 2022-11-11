@@ -60,7 +60,8 @@ function createNewBooking(userID, date, roomNumber) {
   postBooking(userID, date, roomNumber)
     .then((data) => {
       console.log("Is it getting here?")
-      console.log(data)
+      console.log(data.newBooking)
+      store.hotel.addNewBooking(data.newBooking)
       show(bookRoomSuccessPopup)
       blur(allContent)
     })

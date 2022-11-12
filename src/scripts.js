@@ -72,10 +72,12 @@ function createNewBooking(userID, date, roomNumber, event) {
       setUpCustomerDashboard()
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
+      bookRoomSuccessPopup.focus()
       blur(allContent)
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
+      networkErrorPopup.focus()
       show(networkErrorPopup)
       blur(allContent)
     })
@@ -114,10 +116,10 @@ function toggleUpcomingBookingsDisplay() {
   upcomingBookings.classList.toggle('bookings-open')
   upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
   if(upcomingBookings.classList.contains('bookings-open')) {
-    upcomingBookings.ariaExpanded = 'true';
+    upcomingBookingContainer.ariaExpanded = 'true';
     displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, getCurrentDate()), upcomingBookingContainer)
   } else {
-    upcomingBookings.ariaExpanded = 'false';
+    upcomingBookingContainer.ariaExpanded = 'false';
     upcomingBookingContainer.innerHTML = ''
   }
 }
@@ -126,10 +128,10 @@ function togglePreviousBookingsDisplay() {
   previousBookings.classList.toggle('bookings-open');
   previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
   if(previousBookings.classList.contains('bookings-open')) {
-    previousBookings.ariaExpanded = 'true';
+    previousBookingContainer.ariaExpanded = 'true';
     displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, getCurrentDate()), previousBookingContainer)
   } else {
-    previousBookings.ariaExpanded = 'false';
+    previousBookingContainer.ariaExpanded = 'false';
     previousBookingContainer.innerHTML = ''
   }
 }
@@ -172,6 +174,7 @@ function searchFilter() {
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
+    // chooseDateError.focus() 
   }
 }
 
@@ -182,18 +185,19 @@ function displayAvailableRooms(rooms) {
     hide(chooseDateError)
     show(availableRoomsHeader)
     availableRooms.innerHTML = ''
+    availableRooms.ariaExpanded = true
     rooms.forEach((room, index) => {
       availableRooms.innerHTML+= `
-        <section class="room-card" id="cardNumber:${index}">
+        <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
-            <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
+            <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
             <p class="room-number">Room Number: ${room.number}</p>
             <p class="room-type">${room.roomType}</p>
             <p class="bed-size">${room.bedSize}</p>
-            <p class="examplenumber-of-beds">Number of beds: ${room.numBeds}</p>
-            <p class="example-cost-per-night">$${room.costPerNight}</p>
+            <p class="number-of-beds">Number of beds: ${room.numBeds}</p>
+            <p class="cost-per-night">$${room.costPerNight}</p>
           </section>
           <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>
@@ -213,6 +217,7 @@ function removeBookedRoom(parentNode) {
 
 function displayApology() {
   show(noDateAvailablePopup)
+  noDateAvailablePopup.focus()
 }
 
 

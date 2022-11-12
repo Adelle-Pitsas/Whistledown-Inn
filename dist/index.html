@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="previous-booking-dropdown-container">
-              <button class="previous-bookings-dropdown" id="previousBookingDropDown">
+              <button class="previous-bookings-dropdown"  id="previousBookingDropDown">
                 Your Previous Bookings
                 <div class="previous-dropdown-arrow"></div>
               </button>
@@ -49,12 +49,12 @@
           <section class="booking-selection-container" id="bookingSelectionContainer">
             <label class="date-picker-label" id="datePickerLabel">
               Choose a date:
-              <input class="date-picker" id="datePicker" type="date" name="booking" min="2022-11-08"/>
+              <input class="date-picker" id="datePicker" tabindex="0" type="date" name="booking" min="2022-11-08"/>
               <p class="choose-date-error hidden" id="chooseDateError">Please Choose a Date</p>
             </label>
             <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
               Choose a room type:
-              <select id="roomTypeSelect" class="room-type-select">
+              <select id="roomTypeSelect" class="room-type-select" tabindex="0">
                 <!-- Dynamically created options -->
                 <select/>
               </label>
@@ -76,7 +76,7 @@
       <p class="footer-text">This app was created for a module 2 final project</p>
     </footer>
   </section>
-  <section class="book-room-success hidden" id="bookRoomSuccess">
+  <section class="book-room-success hidden" tabindex="0" id="bookRoomSuccess">
     <img src="silouette.png" class="wistledown-silhouette" alt="Lady Wistledown's silouette">
     <div class="confirmation-text">
       <p>We received your request and made your reservation!</p>

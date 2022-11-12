@@ -72,6 +72,7 @@ function createNewBooking(userID, date, roomNumber, event) {
       setUpCustomerDashboard()
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
+      bookRoomSuccessPopup.focus()
       blur(allContent)
     })
     .catch((err) => {
@@ -184,7 +185,7 @@ function displayAvailableRooms(rooms) {
     availableRooms.innerHTML = ''
     rooms.forEach((room, index) => {
       availableRooms.innerHTML+= `
-        <section class="room-card" id="cardNumber:${index}">
+        <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
             <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
           </figure>

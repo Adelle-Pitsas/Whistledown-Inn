@@ -28,15 +28,34 @@ class Hotel {
     }, [])
   }
 
-  findCustomerBookings(customerID) {
+  getRoomCost(roomNumber) {
+    const foundRoom = this.allRooms.find((room) => {
+      return room.number === roomNumber
+    })
+    return foundRoom.costPerNight
+  }
+
+  findUpcomingCustomerBookings(customerID, currentDate) {
    return this.allBookings.filter((booking) => {
-      return booking.userID === customerID
+      return booking.userID === customerID && booking.date >= currentDate
+    })
+  }
+
+  findPreviousCustomerBookings(customerID, currentDate) {
+    return this.allBookings.filter((booking) => {
+      return booking.userID === customerID && booking.date <= currentDate
     })
   }
 
 
-  getCustomerTotalCost(customerID) {
-    const totalBookings = this.findCustomerBookings(customerID);
+  getCustomerTotalCost(customerID, currentDate) {
+    const totalBookings = []
+    this.findUpcomingCustomerBookings(customerID, currentDate).forEach((booking) => {
+      totalBookings.push(booking)
+    })
+    this.findPreviousCustomerBookings(customerID, currentDate).forEach((booking) => {
+      totalBookings.push(booking)
+    })
     return totalBookings.reduce((acc, booking) => {
       const foundRoom = this.allRooms.find((room) => {
         return room.number === booking.roomNumber

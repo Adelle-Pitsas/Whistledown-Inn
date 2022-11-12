@@ -11,12 +11,18 @@ import Customer from './Customer';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 //------QUERY SELECTORS------
+const upcomingBookingDropDown = document.getElementById('upcomingBookingDropDown')
+const upcomingBookings = document.getElementById('upcomingBookings')
+const upcomingDropDownArrow = document.querySelector('.upcoming-dropdown-arrow')
+const upcomingBookingContainer = document.getElementById('upcomingDropdownContainer')
+const previousBookingDropDown = document.getElementById('previousBookingDropDown')
+const previousBookings = document.getElementById('previousBookings')
+const previousDropDownArrow = document.querySelector('.previous-dropdown-arrow')
+const previousBookingContainer = document.getElementById('previousDropdownContainer')
+
+
 const allContent = document.querySelector('.all-content')
 const cumulativeCost = document.getElementById('cumulativeCost')
-const bookingDropDown = document.getElementById('bookingDropDown')
-const bookings = document.getElementById('bookings')
-const dropDownArrow = document.querySelector('.dropdown-arrow')
-const bookingContainer = document.getElementById('dropdownContainer')
 const datePicker = document.getElementById('datePicker')
 const roomTypePicker = document.getElementById('roomTypeSelect')
 const submitButton = document.getElementById('submitSearchButton')
@@ -24,10 +30,8 @@ const chooseDateError = document.getElementById('chooseDateError')
 const availableRooms = document.getElementById('availableRooms')
 const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
-const successDismissButton = document.getElementById('successDismissButton')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
-
 
 
 // ------GLOBAL VARIABLES------
@@ -79,9 +83,11 @@ window.addEventListener('load', initializeApp)
 
 function initializeEventListeners() {
   
-  bookingDropDown.addEventListener('click', toggleBookingsDisplay)
+  upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
 
   submitButton.addEventListener('click', searchFilter)
+
+  previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
 
 }
 
@@ -97,34 +103,48 @@ function setUpCustomerDashboard() {
 }
 
 function getCumulativeCost() {
-  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id)}`
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id, getCurrentDate())}`
 }
 
-function toggleBookingsDisplay() {
-  bookings.classList.toggle('bookings-open')
-  dropDownArrow.classList.toggle('dropdown-arrow-open');
-  if(bookings.classList.contains('bookings-open')) {
-    bookings.ariaExpanded = 'true';
-    displayCustomerBookings()
+function toggleUpcomingBookingsDisplay() {
+  upcomingBookings.classList.toggle('bookings-open')
+  upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
+  if(upcomingBookings.classList.contains('bookings-open')) {
+    upcomingBookings.ariaExpanded = 'true';
+    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, getCurrentDate()), upcomingBookingContainer)
   } else {
-    bookings.ariaExpanded = 'false';
-    bookingContainer.innerHTML = ''
+    upcomingBookings.ariaExpanded = 'false';
+    upcomingBookingContainer.innerHTML = ''
   }
-
 }
 
-function displayCustomerBookings() {
-  bookingContainer.innerHTML = `
+function togglePreviousBookingsDisplay() {
+  previousBookings.classList.toggle('bookings-open');
+  previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
+  if(previousBookings.classList.contains('bookings-open')) {
+    previousBookings.ariaExpanded = 'true';
+    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, getCurrentDate()), previousBookingContainer)
+  } else {
+    previousBookings.ariaExpanded = 'false';
+    previousBookingContainer.innerHTML = ''
+  }
+}
+
+
+function displayCustomerBookings(containerElement, bookings, bookingContainer) {
+  containerElement.innerHTML = `
   <div class="bookings-header-container">
     <h4 class="dropdown-header-date">Date</h4>
-    <h4 class="dropdown-header-room-number">Room Number</h4>
+    <h4 class="dropdown-header-room-number">Room<br>Number</h4>
+    <h4 class="dropdown-header-cost">Cost</h4>
   </div>
   `;
-  store.hotel.findCustomerBookings(store.currentCustomer.id).forEach((booking) => {
+  bookings.forEach((booking) => {
     bookingContainer.innerHTML += `
     <div class="booking">
       <p class="booking-date">${booking.date}</p>
       <p class="booking-room">${booking.roomNumber}</p>
+      <p class="booking-cost">$${store.hotel.getRoomCost(booking.roomNumber)}
     </div>
     `
   })
@@ -197,7 +217,7 @@ function closeMessage(event) {
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
-  return store.customerRepo.findCustomerByID(1)
+  return store.customerRepo.findCustomerByID(13)
 }
 
 function hide(element) {
@@ -218,4 +238,12 @@ function removeBlur(element) {
 
 function formatDate(date) {
   return date.split('-').join('/')
+}
+
+function getCurrentDate() {
+  const date = new Date()
+  let year = date.getFullYear()
+  let month = date.getMonth() + 1
+  let day = date.getDate()
+  return `${year}/${month}/${day}`
 }

@@ -11,7 +11,7 @@
     <section class="header-section">
       <header>
         <h1 class= "welcome-message" id="welcomeMessage">Welcome!</h1>
-        <img class="logo" src="Wistledown-Logo.png" alt="turing logo">
+        <img class="logo" src="Wistledown-Logo.png" alt="Wistledown inn logo with a bee surrounded by flowers">
       </header>
       <div class="header-image-container">
       </div>
@@ -20,7 +20,7 @@
       <section class="main-content" id="mainContent">
         <section class="user-info-container" id="userInfoContainer">
           <div class="cumulative-cost-container" id="cumulativeCostContainer">
-            <h3>Cumulative Cost</h3>
+            <p class="cumulative-cost-header">Cumulative Cost</p>
             <p class="cumulative-cost" id="cumulativeCost">$----.--</p>
           </div>
           <section class="booking-info">
@@ -29,8 +29,8 @@
                 Your Upcoming Bookings
                 <div class="upcoming-dropdown-arrow"></div>
               </button>
-              <div class="upcoming-bookings" id="upcomingBookings" aria-expanded="false">
-                <div class="upcoming-dropdown-container" id="upcomingDropdownContainer"></div>
+              <div class="upcoming-bookings" id="upcomingBookings">
+                <div class="upcoming-dropdown-container" id="upcomingDropdownContainer" aria-expanded="false"></div>
               </div>
             </div>
             <div class="previous-booking-dropdown-container">
@@ -38,8 +38,8 @@
                 Your Previous Bookings
                 <div class="previous-dropdown-arrow"></div>
               </button>
-              <div class="previous-bookings" id="previousBookings" aria-expanded="false">
-                <div class="previous-dropdown-container" id="previousDropdownContainer"></div>
+              <div class="previous-bookings" id="previousBookings">
+                <div class="previous-dropdown-container" id="previousDropdownContainer" aria-expanded="false"></div>
               </div>
             </div>
           </section>
@@ -75,7 +75,7 @@
       <p class="footer-text">This app was created for a module 2 final project</p>
     </footer>
   </section>
-  <section class="book-room-success hidden" tabindex="0" id="bookRoomSuccess">
+  <section class="book-room-success-popup hidden" tabindex="0" id="bookRoomSuccess">
     <img src="silouette.png" class="wistledown-silhouette" alt="Lady Wistledown's silouette">
     <div class="confirmation-text">
       <p>We received your request and made your reservation!</p>
@@ -83,8 +83,8 @@
     </div>
     <button class="dismiss" id="successDismissButton">Dismiss</button>
   </section>
-  <section class="no-dates-available hidden" id="noDatesAvailable">
-    <img src="bee-image.png" class="bee-image" alt="image of a bee">
+  <section class="no-dates-available-popup hidden" id="noDatesAvailable">
+    <img src="bee-image.png" class="image of a bee" alt="image of a bee">
     <div class="no-date-text">
       <p>SO SORRY!!</p>
       <p>There are no rooms available for the dates you selected</p>
@@ -92,7 +92,7 @@
     </div>
     <button class="dismiss" id="noDateDismissButton">Dismiss</button>
   </section>
-  <section class="network-error hidden" id="networkError">
+  <section class="network-error-popup hidden" id="networkError">
     <img src="alert-icon.png" class="alert-icon" alt="alert image">
     <div class="error-text">
       <h3>UH OH!</h3>

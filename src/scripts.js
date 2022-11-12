@@ -60,13 +60,17 @@ function initializeApp() {
     })
 }
 //------ NETWORK REQUEST FUNCTIONS------
-function createNewBooking(userID, date, roomNumber) {
+function createNewBooking(userID, date, roomNumber, event) {
   console.log(date)
   postBooking(userID, date, roomNumber)
     .then((data) => {
-      console.log("Is it getting here?")
+      // console.log("Is it getting here?")
       console.log(data.newBooking)
+      console.log(event)
       store.hotel.addNewBooking(data.newBooking)
+      store.hotel.getCustomerTotalCost(userID, getCurrentDate())
+      setUpCustomerDashboard()
+      removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
       blur(allContent)
     })
@@ -175,11 +179,12 @@ function displayAvailableRooms(rooms) {
   if(!rooms.length) {
     displayApology()
   } else {
+    hide(chooseDateError)
     show(availableRoomsHeader)
     availableRooms.innerHTML = ''
-    rooms.forEach((room) => {
+    rooms.forEach((room, index) => {
       availableRooms.innerHTML+= `
-        <section class="room-card" id="roomCard">
+        <section class="room-card" id="cardNumber:${index}">
           <figure class="picture">
             <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
           </figure>
@@ -199,8 +204,11 @@ function displayAvailableRooms(rooms) {
 
 function bookRoom(event) {
   const date = formatDate(datePicker.value)
-  createNewBooking(store.currentCustomer.id, date, event.target.id)
+  createNewBooking(store.currentCustomer.id, date, event.target.id, event)
+}
 
+function removeBookedRoom(parentNode) {
+  parentNode.parentNode.removeChild(parentNode)
 }
 
 function displayApology() {
@@ -217,7 +225,7 @@ function closeMessage(event) {
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
-  return store.customerRepo.findCustomerByID(13)
+  return store.customerRepo.findCustomerByID(28)
 }
 
 function hide(element) {

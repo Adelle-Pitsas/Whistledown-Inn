@@ -77,6 +77,7 @@ function createNewBooking(userID, date, roomNumber, event) {
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
+      networkErrorPopup.focus()
       show(networkErrorPopup)
       blur(allContent)
     })
@@ -173,6 +174,7 @@ function searchFilter() {
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
+    // chooseDateError.focus() 
   }
 }
 
@@ -183,18 +185,19 @@ function displayAvailableRooms(rooms) {
     hide(chooseDateError)
     show(availableRoomsHeader)
     availableRooms.innerHTML = ''
+    availableRooms.ariaExpanded = true
     rooms.forEach((room, index) => {
       availableRooms.innerHTML+= `
         <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
-            <img src="bedroomImage.png" class="bedroom-image" alt="victorian bedroom">
+            <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
             <p class="room-number">Room Number: ${room.number}</p>
             <p class="room-type">${room.roomType}</p>
             <p class="bed-size">${room.bedSize}</p>
-            <p class="examplenumber-of-beds">Number of beds: ${room.numBeds}</p>
-            <p class="example-cost-per-night">$${room.costPerNight}</p>
+            <p class="number-of-beds">Number of beds: ${room.numBeds}</p>
+            <p class="cost-per-night">$${room.costPerNight}</p>
           </section>
           <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>
@@ -214,6 +217,7 @@ function removeBookedRoom(parentNode) {
 
 function displayApology() {
   show(noDateAvailablePopup)
+  noDateAvailablePopup.focus()
 }
 
 

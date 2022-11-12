@@ -16,8 +16,8 @@
       <div class="header-image-container">
       </div>
     </section>
-    <section class="main-content">
-      <section class="main" id="main">
+    <main>
+      <section class="main-content" id="mainContent">
         <section class="user-info-container" id="userInfoContainer">
           <div class="cumulative-cost-container" id="cumulativeCostContainer">
             <h3>Cumulative Cost</h3>
@@ -46,7 +46,7 @@
         </section>
         <section class="booking-section" id="bookingSection">
           <h2 class="booking-banner" id="bookingBanner"> Make a Booking</h2>
-          <section class="booking-selection-container" id="bookingSelectionContainer">
+          <section class="booking-selection-container" aria-label="booking search form"  id="bookingSelectionContainer">
             <label class="date-picker-label" id="datePickerLabel">
               Choose a date:
               <input class="date-picker" id="datePicker" tabindex="0" type="date" name="booking" min="2022-11-08"/>
@@ -55,21 +55,20 @@
             <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
               Choose a room type:
               <select id="roomTypeSelect" class="room-type-select" tabindex="0">
-                <!-- Dynamically created options -->
                 <select/>
+                <!-- Dynamically created options -->
               </label>
             <button class="submit-search-button" id="submitSearchButton">Search</button>
-          </section>
+            </section>
           <section class="available-rooms-container" id="availableRoomsContainer">
             <h2 class="available-rooms-header hidden" id="availableRoomsHeader">Available Rooms</h2>
             <div class="available-rooms" id="availableRooms">
-
+              <!-- Dynamically created room cards go here  -->
             </div>
-            <!-- Dynamically created room cards go here  -->
           </section>
         </section>
       </section>
-    </section>
+    </main>
     <footer>
       <h3>Contact Us</h3>
       <a class="github-link" href="https://github.com/Adelle-Pitsas"><img class="inline-github-icon" src="github-icon.png" alt="github icon"></a>

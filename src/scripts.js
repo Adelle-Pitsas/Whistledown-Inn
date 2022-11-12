@@ -32,6 +32,7 @@ const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
+const overlay = document.querySelector('.overlay')
 
 
 // ------GLOBAL VARIABLES------
@@ -73,13 +74,13 @@ function createNewBooking(userID, date, roomNumber, event) {
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
       bookRoomSuccessPopup.focus()
-      blur(allContent)
+      show(overlay)
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
       networkErrorPopup.focus()
       show(networkErrorPopup)
-      blur(allContent)
+      show(overlay)
     })
 }
 
@@ -224,7 +225,7 @@ function displayApology() {
 function closeMessage(event) {
   if(event.target.classList.contains('dismiss')) {
   hide(event.target.parentNode)
-  removeBlur(allContent)
+  hide(overlay)
   }
 }
 
@@ -239,14 +240,6 @@ function hide(element) {
 
 function show(element) {
   element.classList.remove('hidden')
-}
-
-function blur(element) {
-  element.classList.add('blur-filter')
-}
-
-function removeBlur(element) {
-  element.classList.remove('blur-filter')
 }
 
 function formatDate(date) {

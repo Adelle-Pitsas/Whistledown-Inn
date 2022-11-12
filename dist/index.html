@@ -10,13 +10,20 @@
   <section class="all-content">
     <section class="header-section">
       <header>
-        <h1 class= "welcome-message" id="welcomeMessage">Welcome!</h1>
+        <h1 class= "welcome-message hidden" id="welcomeMessage">Welcome!</h1>
         <img class="logo" src="Wistledown-Logo.png" alt="Wistledown inn logo with a bee surrounded by flowers">
       </header>
-      <div class="header-image-container">
+      <div class="header-image-container user-login-container">
+        <form class="user-login">
+          <h1 class="login-welcome">Welcome to Wistledown Inn</h1>
+          <h2 class="login-instruction">Please log in with your credentials</h2>
+          <input id="userInputID" class="user-input-id"type="text" placeholder="User ID">
+          <input id="userInputPassword" class="user-input-password" type="text" placeholder="Password">
+          <button class="user-login-button" id="userLoginButton">Login</button>
+        </form>
       </div>
     </section>
-    <main>
+    <main class="hidden">
       <section class="main-content" id="mainContent">
         <section class="user-info-container" id="userInfoContainer">
           <div class="cumulative-cost-container" id="cumulativeCostContainer">

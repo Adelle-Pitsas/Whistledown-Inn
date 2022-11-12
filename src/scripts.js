@@ -104,6 +104,8 @@ window.addEventListener('click', closeMessage)
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
+
+
 function setUpCustomerDashboard() {
   getCumulativeCost();
   getRoomTypeDisplay(store.hotel.getRoomTypes());

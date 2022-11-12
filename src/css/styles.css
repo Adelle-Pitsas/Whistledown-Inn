@@ -36,6 +36,52 @@ header {
   left: 45%
 }
 
+/* ----Login---- */
+
+.user-login {
+  left: calc(50% - 225px);
+  top: calc(50% - 225px);
+  width: 60%;
+  height: 40%;
+  z-index: 9999;
+  text-align: center;
+  background-color: #cfb975a7;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-welcome {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.login-instruction {
+  font-size: 22px;
+}
+
+.user-input-password {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.user-input-id {
+  margin-top: 20px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* .user-login-button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+} */
+
 
 /* ----Main Content---- */
 
@@ -118,6 +164,7 @@ main {
   font-size: 18px;
 }
 
+.user-login-button,
 .submit-search-button {
   height: 40px;
   width: 100px;
@@ -129,6 +176,7 @@ main {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
+.user-login-button:hover,
 .submit-search-button:hover {
   filter: brightness(150%);
 }

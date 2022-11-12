@@ -6,7 +6,8 @@ html {
 }
 
 body {
-  background: #fff9d4;
+  background: 
+  #a1aba2;
   margin: 0px;
   height: 100vh;
   width: 100vw;
@@ -26,12 +27,13 @@ header {
   align-items: center;
   justify-content: center;
   /* that will need to change when I add more */
-  background-color: #cfb975;
-  
+  background-color: #cfb975a7;
 }
 
 .logo {
-  height: 100%;
+  height: 250px;
+  position: absolute;
+  left: 45%
 }
 
 
@@ -45,13 +47,27 @@ header {
 }
 
 
-h1 {
-  margin-top: 275px;
+.header-image-container {
+  padding-top: 400px;
+  padding-bottom: 300px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-image: url(/Users/adelle_pitsas/turing_work/2mod/projects/overlook-hotel/dist/BrigertonHouse.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+}
+
+.welcome-message {
+  font-size: 30px;
+  color: #273135;
+  left: 2%;
+  position: absolute;
 }
 
 .main {
   display: flex;
-  margin-top: 40px;
   width: 100%;
 }
 
@@ -59,8 +75,9 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #60738095;
-  width: 60%;
+  background-color: 
+  #a1aba2;
+  width: 70%;
 }
 
 .booking-banner {
@@ -139,6 +156,7 @@ h1 {
   margin: 32px 8px;
   background-color: #dfd0b5;
   border-radius: 5px;
+  box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
 figure {
@@ -160,7 +178,6 @@ figure {
   flex-direction: column;
   align-items: center;
   margin-top: 2px;
-  border: 2px solid black;
   width: 100%
 }
 
@@ -177,12 +194,14 @@ figure {
 /* ----User Info---- */
 
 .user-info-container {
-  width: 38%;
-  margin-left: 2%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #60738095;
+  background-color: #cfd3bc;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 0 5px 5px 0;
 }
 
 /* ---Cumulative Cost--- */
@@ -205,12 +224,6 @@ figure {
   width: 100%;
   justify-content: space-around;
 }
-
-/* ---booking drop down--- */
-/* .previous-booking-dropdown-container,
-.upcoming-booking-dropdown-container {
-  
-} */
 
 
 .previous-bookings-dropdown,
@@ -296,6 +309,7 @@ figure {
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  margin-bottom: 30px;
 }
 
 .dropdown-header-room-number {
@@ -381,6 +395,18 @@ figure {
 
 .dismiss:hover {
   filter: brightness(110%);
+}
+
+footer {
+  height: 200px;
+  background-color: #cfb975a7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inline-github-icon {
+  height: 40px
 }
 
 /* ----Utility---- */

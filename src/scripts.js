@@ -179,6 +179,7 @@ function displayAvailableRooms(rooms) {
   if(!rooms.length) {
     displayApology()
   } else {
+    hide(chooseDateError)
     show(availableRoomsHeader)
     availableRooms.innerHTML = ''
     rooms.forEach((room, index) => {

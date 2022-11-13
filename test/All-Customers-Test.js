@@ -28,13 +28,25 @@ describe('CustomerRepository', () => {
   });
 
   it('should pass and store customer data as an argument', () => {
-    expect(customerRepo.allCustomers).to.deep.equal(customerData)
+    expect(customerRepo.allCustomers).to.deep.equal([
+      {
+        id: 1,
+        name: "Leatha Ullrich",
+        username: "customer1"
+      },
+      {
+        id: 2,
+        name: "Rocio Schuster",
+        username: "customer2"
+      }
+    ])
   });
 
   it('should contain customer information', () => {
     expect(customerRepo.allCustomers[0]).to.deep.equal({
       id: 1,
-      name: "Leatha Ullrich"
+      name: "Leatha Ullrich",
+      username: "customer1"
       })
     });
 
@@ -48,7 +60,8 @@ describe('CustomerRepository', () => {
     const getID = customerRepo.findCustomerByID(2)
     expect(getID).to.deep.equal({
       id: 2,
-      name: "Rocio Schuster"
+      name: "Rocio Schuster",
+      username: "customer2"
       })
   })
 

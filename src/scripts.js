@@ -20,7 +20,7 @@ const previousBookings = document.getElementById('previousBookings')
 const previousDropDownArrow = document.querySelector('.previous-dropdown-arrow')
 const previousBookingContainer = document.getElementById('previousDropdownContainer')
 
-
+const customerContent = document.querySelector('.main')
 const cumulativeCost = document.getElementById('cumulativeCost')
 const datePicker = document.getElementById('datePicker')
 const roomTypePicker = document.getElementById('roomTypeSelect')
@@ -32,6 +32,7 @@ const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
 const overlay = document.querySelector('.overlay')
+const userLoginForm = document.getElementById('userLoginForm')
 const usernameInput = document.getElementById('userInputID');
 const passwordInput = document.getElementById('userInputPassword');
 const userLoginButton = document.getElementById('userLoginButton')
@@ -84,6 +85,9 @@ function createNewBooking(userID, date, roomNumber, event) {
     })
 }
 
+function getUser() {
+  
+}
 
 // ------EVENT LISTENERS------
 window.addEventListener('load', initializeApp)
@@ -120,7 +124,7 @@ function checkValidInputs() {
   const usernameID = parseUsername(usernameInput.value)
   const isValidPassword = parsePassword(passwordInput.value)
   if (usernameID && isValidPassword) {
-    setUpCustomerDashboard()
+    setUpCustomerDashboard(usernameID)
   } else {
     show(networkErrorPopup)
   //this needs to be replaced with "your credentials don't match anything we have in our system, please try again"
@@ -146,14 +150,16 @@ function parsePassword(password) {
   }
 }
 
-function setUpCustomerDashboard() {
-  hide()
-  getCumulativeCost();
+function setUpCustomerDashboard(id) {
+  getCustomer(id)
+  hide(userLoginForm)
+  show(customerContent)
+  getCumulativeCost(store.currentCustomer);
   getRoomTypeDisplay(store.hotel.getRoomTypes());
 }
 
-function getCumulativeCost() {
-  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id, getCurrentDate())}`
+function getCumulativeCost(currentCustomer) {
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(currentCustomer.id, getCurrentDate())}`
 }
 
 function toggleUpcomingBookingsDisplay() {
@@ -273,8 +279,8 @@ function closeMessage(event) {
 }
 
 // ------UTILITY FUNCTIONS------
-function getCustomer() {
-  return store.customerRepo.findCustomerByID(28)
+function getCustomer(id) {
+  store.currentCustomer = store.customerRepo.findCustomerByID(id)
 }
 
 function hide(element) {

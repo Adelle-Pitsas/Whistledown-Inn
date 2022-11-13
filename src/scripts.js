@@ -200,11 +200,11 @@ function displayAvailableRooms(rooms) {
             <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
-            <p class="room-number">Room Number: ${room.number}</p>
-            <p class="room-type">${room.roomType}</p>
-            <p class="bed-size">${room.bedSize}</p>
-            <p class="number-of-beds">Number of beds: ${room.numBeds}</p>
-            <p class="cost-per-night">$${room.costPerNight}</p>
+            <p class="room-info room-number">Room Number: ${room.number}</p>
+            <p class="room-info room-type">Type: ${room.roomType}</p>
+            <p class="room-info bed-size">Bed Size: ${room.bedSize}</p>
+            <p class="room-info number-of-beds">Number of beds: ${room.numBeds}</p>
+            <p class="room-info cost-per-night">Cost: $${room.costPerNight}</p>
           </section>
           <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>

@@ -42,7 +42,7 @@ function getAllData() {
   .catch((err) => console.error(err))
 } 
 
-const postURL = "http://localhost:3001/api/v1/bookings"
+const postURL = "http://localhost:3001/a/v1/bookings"
 
 function postBooking(userID, date, roomNumber) {
   // console.log(userID.toString())

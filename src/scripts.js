@@ -31,7 +31,7 @@ const availableRooms = document.getElementById('availableRooms')
 const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
-const networkErrorPopup =document.getElementById('networkError')
+const networkErrorPopup = document.getElementById('networkError')
 const overlay = document.querySelector('.overlay')
 
 
@@ -78,8 +78,8 @@ function createNewBooking(userID, date, roomNumber, event) {
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
-      networkErrorPopup.focus()
       show(networkErrorPopup)
+      networkErrorPopup.focus()
       show(overlay)
     })
 }
@@ -101,6 +101,12 @@ function initializeEventListeners() {
 availableRooms.addEventListener('click', bookRoom)
 
 window.addEventListener('click', closeMessage)
+
+// window.addEventListener('keyup', (event) => {
+//   if(event.key === 'Escape') {
+//     hide(event.parentNode)
+//     hide(overlay)
+//   }})
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
@@ -158,7 +164,7 @@ function displayCustomerBookings(containerElement, bookings, bookingContainer) {
 }
 
 function getRoomTypeDisplay(roomTypes) {
-  roomTypePicker.innerHTML = `<option value="default-select">Choose an option</option>`
+  roomTypePicker.innerHTML = `<option value="Any">Any</option>`
   roomTypes.forEach((roomType) => {
     roomTypePicker.innerHTML += `
       <option value="${roomType}">${roomType}</option>
@@ -167,10 +173,10 @@ function getRoomTypeDisplay(roomTypes) {
 }
 
 function searchFilter() {
-  if(datePicker.value && roomTypePicker.value==='default-select') {
+  if(datePicker.value && roomTypePicker.value==='Any') {
     const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.getAvailableRooms(date))
-  } else if(datePicker.value && roomTypePicker !== 'default-select') {
+  } else if(datePicker.value && roomTypePicker !== 'Any') {
     const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
@@ -194,11 +200,11 @@ function displayAvailableRooms(rooms) {
             <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
-            <p class="room-number">Room Number: ${room.number}</p>
-            <p class="room-type">${room.roomType}</p>
-            <p class="bed-size">${room.bedSize}</p>
-            <p class="number-of-beds">Number of beds: ${room.numBeds}</p>
-            <p class="cost-per-night">$${room.costPerNight}</p>
+            <p class="room-info room-number">Room Number: ${room.number}</p>
+            <p class="room-info room-type">Type: ${room.roomType}</p>
+            <p class="room-info bed-size">Bed Size: ${room.bedSize}</p>
+            <p class="room-info number-of-beds">Number of beds: ${room.numBeds}</p>
+            <p class="room-info cost-per-night">Cost: $${room.costPerNight}</p>
           </section>
           <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>
@@ -231,7 +237,7 @@ function closeMessage(event) {
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
-  return store.customerRepo.findCustomerByID(28)
+  return store.customerRepo.findCustomerByID(39)
 }
 
 function hide(element) {

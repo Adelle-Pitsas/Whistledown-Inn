@@ -50,7 +50,7 @@
             <label class="date-picker-label" id="datePickerLabel">
               Choose a date:
               <input class="date-picker" id="datePicker" tabindex="0" type="date" name="booking" min="2022-11-08"/>
-              <p class="choose-date-error hidden" id="chooseDateError">Please Choose a Date</p>
+              <p class="choose-date-error hidden" id="chooseDateError">*Please choose a date</p>
             </label>
             <label class="room-type-dropdown-label" id="roomTypeDropdownLabel">
               Choose a room type:
@@ -84,7 +84,7 @@
     </div>
     <button class="dismiss" id="successDismissButton">Dismiss</button>
   </section>
-  <section class="no-dates-available-popup hidden" id="noDatesAvailable">
+  <section class="no-dates-available-popup hidden" id="noDatesAvailable" tabindex="0">
     <img src="bee-image.png" class="image of a bee" alt="image of a bee">
     <div class="no-date-text">
       <p>SO SORRY!!</p>
@@ -93,7 +93,7 @@
     </div>
     <button class="dismiss" id="noDateDismissButton">Dismiss</button>
   </section>
-  <section class="network-error-popup hidden" id="networkError">
+  <section class="network-error-popup hidden" id="networkError" tabindex="0">
     <img src="alert-icon.png" class="alert-icon" alt="alert image">
     <div class="error-text">
       <h3>UH OH!</h3>
@@ -104,6 +104,5 @@
   </section>
     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>

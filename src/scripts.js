@@ -21,7 +21,6 @@ const previousDropDownArrow = document.querySelector('.previous-dropdown-arrow')
 const previousBookingContainer = document.getElementById('previousDropdownContainer')
 
 
-const allContent = document.querySelector('.all-content')
 const cumulativeCost = document.getElementById('cumulativeCost')
 const datePicker = document.getElementById('datePicker')
 const roomTypePicker = document.getElementById('roomTypeSelect')
@@ -33,6 +32,9 @@ const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
 const overlay = document.querySelector('.overlay')
+const usernameInput = document.getElementById('userInputID');
+const passwordInput = document.getElementById('userInputPassword');
+const userLoginButton = document.getElementById('userLoginButton')
 
 
 // ------GLOBAL VARIABLES------
@@ -46,7 +48,7 @@ const store = {
 }
 
 // -------WINDOW LOAD FUNCTIONS------
-function initializeApp() {
+function initializeApp(event) {
   getAllData()
     .then((data) => {
       store.roomData = data.roomsData
@@ -55,9 +57,7 @@ function initializeApp() {
       store.customerRepo = new CustomerRepository(data.customersData)
       store.currentCustomer = getCustomer()
       initializeEventListeners()
-      setUpCustomerDashboard()
-      // console.log(store.bookingData)
-
+      console.log(store.customerRepo)
     })
 }
 //------ NETWORK REQUEST FUNCTIONS------
@@ -89,14 +89,15 @@ function createNewBooking(userID, date, roomNumber, event) {
 window.addEventListener('load', initializeApp)
 
 function initializeEventListeners() {
-  
-  upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
 
-  submitButton.addEventListener('click', searchFilter)
-
-  previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
+  userLoginButton.addEventListener('click', checkEmptyInputs)
 
 }
+upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
+
+submitButton.addEventListener('click', searchFilter)
+
+previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
 
 availableRooms.addEventListener('click', bookRoom)
 
@@ -104,9 +105,49 @@ window.addEventListener('click', closeMessage)
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
+function checkEmptyInputs(event) {
+  event.preventDefault()
+  if(!usernameInput.value || !passwordInput.value) {
+    show(networkErrorPopup)
+    //this needs to be replaced with "please fill out all fields"
+    show(overlay)
+  } else {
+    checkValidInputs()
+  }
+}
 
+function checkValidInputs() {
+  const usernameID = parseUsername(usernameInput.value)
+  const isValidPassword = parsePassword(passwordInput.value)
+  if (usernameID && isValidPassword) {
+    setUpCustomerDashboard()
+  } else {
+    show(networkErrorPopup)
+  //this needs to be replaced with "your credentials don't match anything we have in our system, please try again"
+    show(overlay)
+  }
+}
+
+
+function parseUsername(username) {
+  const foundUser = store.customerRepo.allCustomers.find((customer) => {
+    return customer.username === username
+  })
+  if(foundUser) {
+    return foundUser.id
+  }
+}
+
+function parsePassword(password) {
+  if(password === 'overlook2021') {
+    return true
+  } else {
+    return false
+  }
+}
 
 function setUpCustomerDashboard() {
+  hide()
   getCumulativeCost();
   getRoomTypeDisplay(store.hotel.getRoomTypes());
 }

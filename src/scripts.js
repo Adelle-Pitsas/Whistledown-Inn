@@ -49,9 +49,9 @@ const store = {
   bookingData: [],
   roomData: [],
   customersData: [],
-  currentCustomer: new Customer()
+  currentCustomer: new Customer(),
+  currentDate: new Date()
 }
-
 // -------WINDOW LOAD FUNCTIONS------
 function initializeApp(event) {
   getAllData()
@@ -62,7 +62,8 @@ function initializeApp(event) {
       store.customerRepo = new CustomerRepository(data.customersData)
       store.currentCustomer = getCustomer()
       initializeEventListeners()
-      console.log(store.customerRepo)
+      store.currentDate = getCurrentDate()
+      console.log(store.currentDate)
     })
 }
 //------ NETWORK REQUEST FUNCTIONS------
@@ -74,8 +75,9 @@ function createNewBooking(userID, date, roomNumber, event) {
       console.log(data.newBooking)
       console.log(event)
       store.hotel.addNewBooking(data.newBooking)
-      store.hotel.getCustomerTotalCost(userID, getCurrentDate())
-      setUpCustomerDashboard()
+      store.hotel.getCustomerTotalCost(userID, store.currentDate)
+      getCumulativeCost(store.currentCustomer);
+      getRoomTypeDisplay(store.hotel.getRoomTypes())
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
       bookRoomSuccessPopup.focus()
@@ -123,6 +125,8 @@ function checkValidInputs() {
   const usernameID = parseUsername(usernameInput.value)
   const isValidPassword = parsePassword(passwordInput.value)
   if (usernameID && isValidPassword) {
+    hide(emptyFieldsError)
+    hide(unmatchedCredentialsError)
     show(loadingCircle)
     setTimeout(() => {
       setUpCustomerDashboard(usernameID)
@@ -154,8 +158,6 @@ function parsePassword(password) {
 }
 
 function setUpCustomerDashboard(id) {
-  hide(unmatchedCredentialsError)
-  hide(emptyFieldsError)
   getCustomer(id)
   hide(userLoginForm)
   show(customerContent)
@@ -164,7 +166,7 @@ function setUpCustomerDashboard(id) {
 }
 
 function getCumulativeCost(currentCustomer) {
-  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(currentCustomer.id, getCurrentDate())}`
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(currentCustomer.id, store.currentDate)}`
 }
 
 function toggleUpcomingBookingsDisplay() {
@@ -172,7 +174,7 @@ function toggleUpcomingBookingsDisplay() {
   upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
   if(upcomingBookings.classList.contains('bookings-open')) {
     upcomingBookingContainer.ariaExpanded = 'true';
-    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, getCurrentDate()), upcomingBookingContainer)
+    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, store.currentDate), upcomingBookingContainer)
   } else {
     upcomingBookingContainer.ariaExpanded = 'false';
     upcomingBookingContainer.innerHTML = ''
@@ -184,7 +186,7 @@ function togglePreviousBookingsDisplay() {
   previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
   if(previousBookings.classList.contains('bookings-open')) {
     previousBookingContainer.ariaExpanded = 'true';
-    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, getCurrentDate()), previousBookingContainer)
+    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, store.currentDate), previousBookingContainer)
   } else {
     previousBookingContainer.ariaExpanded = 'false';
     previousBookingContainer.innerHTML = ''
@@ -229,7 +231,6 @@ function searchFilter() {
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
-    // chooseDateError.focus() 
   }
 }
 

@@ -164,7 +164,7 @@ function displayCustomerBookings(containerElement, bookings, bookingContainer) {
 }
 
 function getRoomTypeDisplay(roomTypes) {
-  roomTypePicker.innerHTML = `<option value="default-select">Choose an option</option>`
+  roomTypePicker.innerHTML = `<option value="Any">Any</option>`
   roomTypes.forEach((roomType) => {
     roomTypePicker.innerHTML += `
       <option value="${roomType}">${roomType}</option>
@@ -173,10 +173,10 @@ function getRoomTypeDisplay(roomTypes) {
 }
 
 function searchFilter() {
-  if(datePicker.value && roomTypePicker.value==='default-select') {
+  if(datePicker.value && roomTypePicker.value==='Any') {
     const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.getAvailableRooms(date))
-  } else if(datePicker.value && roomTypePicker !== 'default-select') {
+  } else if(datePicker.value && roomTypePicker !== 'Any') {
     const date = formatDate(datePicker.value)
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {

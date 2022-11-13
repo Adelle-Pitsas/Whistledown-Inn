@@ -343,7 +343,12 @@ figure {
 /* ----Pop Ups---- */
 .choose-date-error {
   color: red;
-  font-size: 14px;
+  padding: 7px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.644);
+  font-size: 18px;
 }
 
 .network-error-popup,

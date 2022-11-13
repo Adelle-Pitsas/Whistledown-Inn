@@ -31,7 +31,7 @@ const availableRooms = document.getElementById('availableRooms')
 const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
-const networkErrorPopup =document.getElementById('networkError')
+const networkErrorPopup = document.getElementById('networkError')
 const overlay = document.querySelector('.overlay')
 
 
@@ -78,8 +78,8 @@ function createNewBooking(userID, date, roomNumber, event) {
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
-      networkErrorPopup.focus()
       show(networkErrorPopup)
+      networkErrorPopup.focus()
       show(overlay)
     })
 }
@@ -101,6 +101,12 @@ function initializeEventListeners() {
 availableRooms.addEventListener('click', bookRoom)
 
 window.addEventListener('click', closeMessage)
+
+// window.addEventListener('keyup', (event) => {
+//   if(event.key === 'Escape') {
+//     hide(event.parentNode)
+//     hide(overlay)
+//   }})
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
@@ -231,7 +237,7 @@ function closeMessage(event) {
 
 // ------UTILITY FUNCTIONS------
 function getCustomer() {
-  return store.customerRepo.findCustomerByID(28)
+  return store.customerRepo.findCustomerByID(39)
 }
 
 function hide(element) {

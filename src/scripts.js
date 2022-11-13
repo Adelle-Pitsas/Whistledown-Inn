@@ -31,11 +31,15 @@ const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
 const networkErrorPopup =document.getElementById('networkError')
-const overlay = document.querySelector('.overlay')
+const overlayMain = document.querySelector('.overlay-main')
+const overlayLogin = document.querySelector('.overlay-login')
 const userLoginForm = document.getElementById('userLoginForm')
 const usernameInput = document.getElementById('userInputID');
 const passwordInput = document.getElementById('userInputPassword');
 const userLoginButton = document.getElementById('userLoginButton')
+const unmatchedCredentialsError = document.querySelector('.unmatched-credentials-error')
+const emptyFieldsError = document.querySelector('.empty-fields-error')
+const loadingCircle = document.getElementById('loadingCircle')
 
 
 // ------GLOBAL VARIABLES------
@@ -75,18 +79,14 @@ function createNewBooking(userID, date, roomNumber, event) {
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
       bookRoomSuccessPopup.focus()
-      show(overlay)
+      show(overlayMain)
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
       networkErrorPopup.focus()
       show(networkErrorPopup)
-      show(overlay)
+      show(overlayMain)
     })
-}
-
-function getUser() {
-  
 }
 
 // ------EVENT LISTENERS------
@@ -112,9 +112,8 @@ window.addEventListener('click', closeMessage)
 function checkEmptyInputs(event) {
   event.preventDefault()
   if(!usernameInput.value || !passwordInput.value) {
-    show(networkErrorPopup)
-    //this needs to be replaced with "please fill out all fields"
-    show(overlay)
+    hide(unmatchedCredentialsError)
+    show(emptyFieldsError)
   } else {
     checkValidInputs()
   }
@@ -124,11 +123,15 @@ function checkValidInputs() {
   const usernameID = parseUsername(usernameInput.value)
   const isValidPassword = parsePassword(passwordInput.value)
   if (usernameID && isValidPassword) {
-    setUpCustomerDashboard(usernameID)
+    show(loadingCircle)
+    setTimeout(() => {
+      setUpCustomerDashboard(usernameID)
+      hide(loadingCircle)
+      }, 2000)
+    
   } else {
-    show(networkErrorPopup)
-  //this needs to be replaced with "your credentials don't match anything we have in our system, please try again"
-    show(overlay)
+    hide(emptyFieldsError)
+    show(unmatchedCredentialsError)
   }
 }
 
@@ -151,6 +154,8 @@ function parsePassword(password) {
 }
 
 function setUpCustomerDashboard(id) {
+  hide(unmatchedCredentialsError)
+  hide(emptyFieldsError)
   getCustomer(id)
   hide(userLoginForm)
   show(customerContent)
@@ -274,7 +279,7 @@ function displayApology() {
 function closeMessage(event) {
   if(event.target.classList.contains('dismiss')) {
   hide(event.target.parentNode)
-  hide(overlay)
+  hide(overlayMain)
   }
 }
 

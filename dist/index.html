@@ -11,19 +11,25 @@
     <section class="header-section">
       <header>
         <h1 class= "welcome-message hidden" id="welcomeMessage">Welcome!</h1>
-        <img class="logo" src="Wistledown-Logo.png" alt="Wistledown inn logo with a bee surrounded by flowers">
+        <img class="logo" src="Whistledown-Logo.png" alt="Wistledown inn logo with a bee surrounded by flowers">
       </header>
       <div class="header-image-container user-login-container">
-        <form class="user-login">
-          <h1 class="login-welcome">Welcome to Wistledown Inn</h1>
+        <form class="user-login" id="userLoginForm">
+          <h1 class="login-welcome">Welcome to Whistledown Inn</h1>
           <h2 class="login-instruction">Please log in with your credentials</h2>
           <input id="userInputID" class="user-input-id"type="text" placeholder="User ID">
           <input id="userInputPassword" class="user-input-password" type="text" placeholder="Password">
           <button class="user-login-button" id="userLoginButton">Login</button>
+          <p class="unmatched-credentials-error hidden">Your info doesn't match our records.<br>Please try again.</p>
+          <p class="empty-fields-error hidden">Please fill out all fields.</p>
+          <svg id="loadingCircle" class="hidden" width="100" height="100">
+            <circle cx="50" cy="50" r="20" stroke="#273135" stroke-dasharray="100" stroke-width="6" fill="transparent"/>
+          </svg>
+          <!-- <div class="overlay-login hidden"></div> -->
         </form>
       </div>
     </section>
-    <main class="hidden">
+    <main class="main hidden">
       <section class="main-content" id="mainContent">
         <section class="user-info-container" id="userInfoContainer">
           <div class="cumulative-cost-container" id="cumulativeCostContainer">
@@ -82,7 +88,7 @@
       <p class="footer-text">This app was created for a module 2 final project</p>
     </footer>
   </section>
-  <div class="overlay hidden"></div>
+  <div class="overlay-main hidden"></div>
   <section class="book-room-success-popup hidden" tabindex="0" id="bookRoomSuccess">
     <img src="silouette.png" class="wistledown-silhouette" alt="Lady Wistledown's silouette">
     <div class="confirmation-text">

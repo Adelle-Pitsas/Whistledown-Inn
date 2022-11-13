@@ -40,6 +40,7 @@ const userLoginButton = document.getElementById('userLoginButton')
 const unmatchedCredentialsError = document.querySelector('.unmatched-credentials-error')
 const emptyFieldsError = document.querySelector('.empty-fields-error')
 const loadingCircle = document.getElementById('loadingCircle')
+const welcomeMessage = document.getElementById('welcomeMessage')
 
 
 // ------GLOBAL VARIABLES------
@@ -159,6 +160,8 @@ function parsePassword(password) {
 
 function setUpCustomerDashboard(id) {
   getCustomer(id)
+  welcomeMessage.innerText = `Welcome ${store.currentCustomer.name}!`
+  show(welcomeMessage)
   hide(userLoginForm)
   show(customerContent)
   getCumulativeCost(store.currentCustomer);

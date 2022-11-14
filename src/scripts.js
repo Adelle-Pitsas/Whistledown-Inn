@@ -50,7 +50,6 @@ const unmatchedCredentialsError = document.querySelector('.unmatched-credentials
 const emptyFieldsError = document.querySelector('.empty-fields-error')
 const loadingCircle = document.getElementById('loadingCircle')
 const welcomeMessage = document.getElementById('welcomeMessage')
-const networkErrorPopup = document.getElementById('networkError')
 
 
 
@@ -303,6 +302,7 @@ function closeMessage(event) {
 // ------UTILITY FUNCTIONS------
 function getCustomer(id) {
   store.currentCustomer = store.customerRepo.findCustomerByID(id)
+}
 
 function hide(element) {
   element.classList.add('hidden')
@@ -317,9 +317,9 @@ function formatDate(date) {
 }
 
 function getCurrentDate() {
-  const date = new Date()
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  let day = date.getDate()
+  const date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
   return `${year}/${month}/${day}`
 }

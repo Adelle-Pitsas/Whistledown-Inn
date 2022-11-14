@@ -1,3 +1,13 @@
+/* @font-face {
+  font-family: Garamond;
+  src: url('../../dist/EBGaramond-Italic-VariableFont_wght.ttf') format(Garamond);
+} */
+
+* {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  /* font-family: DancingScript; */
+}
+
 html {
   position: relative;
   margin: 0px;

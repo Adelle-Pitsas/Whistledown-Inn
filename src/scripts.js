@@ -50,7 +50,6 @@ const unmatchedCredentialsError = document.querySelector('.unmatched-credentials
 const emptyFieldsError = document.querySelector('.empty-fields-error')
 const loadingCircle = document.getElementById('loadingCircle')
 const welcomeMessage = document.getElementById('welcomeMessage')
-const networkErrorPopup = document.getElementById('networkError')
 
 
 

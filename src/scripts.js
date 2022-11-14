@@ -54,7 +54,7 @@ const welcomeMessage = document.getElementById('welcomeMessage')
 // ------GLOBAL VARIABLES------
 const store = {
   hotel: new Hotel(),
-  customerRepo: new CustomerRepository(),
+  // customerRepo: new CustomerRepository(),
   bookingData: [],
   roomData: [],
   customersData: [],
@@ -62,17 +62,24 @@ const store = {
   currentDate: new Date()
 }
 // -------WINDOW LOAD FUNCTIONS------
-function initializeApp(event) {
-  getAllData()
+function initializeApp(customerID) {
+  getAllData(customerID)
     .then((data) => {
-      store.roomData = data.roomsData
-      store.bookingData = data.bookingsData;
-      store.hotel = new Hotel(store.roomData, store.bookingData)
-      store.customerRepo = new CustomerRepository(data.customersData)
-      store.currentCustomer = getCustomer()
-      initializeEventListeners()
-      store.currentDate = getCurrentDate()
-      setMinDate(store.currentDate)
+        store.roomData = data.roomsData
+        store.bookingData = data.bookingsData;
+        store.hotel = new Hotel(store.roomData, store.bookingData)
+        store.currentCustomer = new Customer(data.customerData.id, data.customerData.name)
+        store.currentDate = getCurrentDate()
+        setMinDate(store.currentDate)
+        show(loadingCircle)
+        setTimeout(() => {
+        setUpCustomerDashboard()
+        hide(loadingCircle)
+        }, 2000)
+    })
+    .catch((err) => {
+      console.error('CATCH ERROR', err);
+      show(unmatchedCredentialsError)
     })
 }
 
@@ -83,8 +90,6 @@ function createNewBooking(userID, date, roomNumber, event) {
   postBooking(userID, date, roomNumber)
     .then((data) => {
       // console.log("Is it getting here?")
-      console.log(data.newBooking)
-      console.log(event)
       store.hotel.addNewBooking(data.newBooking)
       store.hotel.getCustomerTotalCost(userID, store.currentDate)
       getCumulativeCost(store.currentCustomer);
@@ -103,13 +108,9 @@ function createNewBooking(userID, date, roomNumber, event) {
 }
 
 // ------EVENT LISTENERS------
-window.addEventListener('load', initializeApp)
 
-function initializeEventListeners() {
+userLoginButton.addEventListener('click', checkEmptyInputs)
 
-  userLoginButton.addEventListener('click', checkEmptyInputs)
-
-}
 upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
 
 submitButton.addEventListener('click', searchFilter)
@@ -139,39 +140,33 @@ function checkEmptyInputs(event) {
 }
 
 function checkValidInputs() {
-  const usernameID = parseUsername(usernameInput.value)
+  const isValidUsername= checkValidUsername(usernameInput.value)
+  const usernameID = getUserID(usernameInput.value)
   const isValidPassword = parsePassword(passwordInput.value)
-  if (usernameID && isValidPassword) {
+  if (isValidPassword && isValidUsername) {
+    initializeApp(usernameID)
     hide(emptyFieldsError)
     hide(unmatchedCredentialsError)
-    show(loadingCircle)
-    setTimeout(() => {
-      setUpCustomerDashboard(usernameID)
-      hide(loadingCircle)
-      }, 2000)
-    
   } else {
     hide(emptyFieldsError)
     show(unmatchedCredentialsError)
   }
 }
 
-
-function parseUsername(username) {
-  const foundUser = store.customerRepo.allCustomers.find((customer) => {
-    return customer.username === username
-  })
-  if(foundUser) {
-    return foundUser.id
-  }
+function getUserID(id) {
+  const toSlice = ((id.length)-8)* -1
+  return id.slice(toSlice)
 }
 
 function parsePassword(password) {
   return password === 'overlook2021'
 }
 
-function setUpCustomerDashboard(id) {
-  getCustomer(id)
+function checkValidUsername(username) {
+  return username.slice(0,8) === 'customer'
+}
+
+function setUpCustomerDashboard() {
   welcomeMessage.innerText = `Welcome ${store.currentCustomer.name}!`
   show(welcomeMessage)
   hide(userLoginForm)
@@ -300,9 +295,6 @@ function closeMessage(event) {
 }
 
 // ------UTILITY FUNCTIONS------
-function getCustomer(id) {
-  store.currentCustomer = store.customerRepo.findCustomerByID(id)
-}
 
 function hide(element) {
   element.classList.add('hidden')

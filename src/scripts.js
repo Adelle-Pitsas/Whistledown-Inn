@@ -72,6 +72,7 @@ function initializeApp(customerID) {
         store.currentDate = getCurrentDate()
         setMinDate(store.currentDate)
         show(loadingCircle)
+        hide(userLoginButton)
         setTimeout(() => {
         setUpCustomerDashboard()
         hide(loadingCircle)
@@ -120,12 +121,6 @@ previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
 availableRooms.addEventListener('click', bookRoom)
 
 window.addEventListener('click', closeMessage)
-
-// window.addEventListener('keyup', (event) => {
-//   if(event.key === 'Escape') {
-//     hide(event.parentNode)
-//     hide(overlay)
-//   }})
 
 
 // ------EVENT HANDLERS/FUNCTIONS------

@@ -1,11 +1,6 @@
-/* @font-face {
-  font-family: Garamond;
-  src: url('../../dist/EBGaramond-Italic-VariableFont_wght.ttf') format(Garamond);
-} */
 
 * {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-  /* font-family: DancingScript; */
 }
 
 html {
@@ -36,7 +31,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* that will need to change when I add more */
   background-color: #cfb975a7;
 }
 
@@ -51,8 +45,8 @@ header {
 .user-login {
   left: calc(50% - 225px);
   top: calc(50% - 225px);
-  width: 60%;
-  height: 40%;
+  width: 600px;
+  height: 350px;
   z-index: 9999;
   text-align: center;
   background-color: #cfb975a7;
@@ -96,7 +90,6 @@ header {
 }
 
 svg {
-  /* width: 100px; */
   overflow: visible;
 }
 

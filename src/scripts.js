@@ -48,7 +48,8 @@ const passwordInput = document.getElementById('userInputPassword');
 const userLoginButton = document.getElementById('userLoginButton')
 const unmatchedCredentialsError = document.querySelector('.unmatched-credentials-error')
 const emptyFieldsError = document.querySelector('.empty-fields-error')
-const loadingCircle = document.getElementById('loadingCircle')
+const loginLoadingCircle = document.getElementById('loadingCircle')
+const roomsLoadingCircle = document.getElementById('roomsLoadingCircle')
 const welcomeMessage = document.getElementById('welcomeMessage')
 
 // ------GLOBAL VARIABLES------
@@ -71,7 +72,7 @@ function initializeApp(customerID) {
         store.currentCustomer = new Customer(data.customerData.id, data.customerData.name)
         store.currentDate = getCurrentDate()
         setMinDate(store.currentDate)
-        show(loadingCircle)
+        show(loginLoadingCircle)
         hide(userLoginButton)
         setTimeout(() => {
         setUpCustomerDashboard()
@@ -230,10 +231,20 @@ function getRoomTypeDisplay(roomTypes) {
 function searchFilter() {
   if(datePicker.value && roomTypePicker.value==='Any') {
     const date = formatDate(datePicker.value)
-    displayAvailableRooms(store.hotel.getAvailableRooms(date))
+    show(roomsLoadingCircle)
+    hide(chooseDateError)
+    setTimeout(() => {
+      hide(roomsLoadingCircle)
+      displayAvailableRooms(store.hotel.getAvailableRooms(date))
+      }, 1000)
   } else if(datePicker.value && roomTypePicker !== 'Any') {
     const date = formatDate(datePicker.value)
-    displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
+    show(roomsLoadingCircle)
+    hide(chooseDateError)
+    setTimeout(() => {
+      hide(roomsLoadingCircle)
+      displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
+    }, 1000)
   } else {
     show(chooseDateError)
   }
@@ -243,7 +254,6 @@ function displayAvailableRooms(rooms) {
   if(!rooms.length) {
     displayApology()
   } else {
-    hide(chooseDateError)
     show(availableRoomsHeader)
     availableRooms.innerHTML = ''
     availableRooms.ariaExpanded = true

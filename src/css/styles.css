@@ -46,7 +46,7 @@ header {
   left: calc(50% - 225px);
   top: calc(50% - 225px);
   width: 600px;
-  height: 350px;
+  height: 375px;
   z-index: 9999;
   text-align: center;
   background-color: #cfb975a7;
@@ -82,11 +82,12 @@ header {
 
 .unmatched-credentials-error,
 .empty-fields-error {
-  width: 50%;
+  width: 200px;
   padding: 10px;
   border-radius: 5px;
   color: red;
   background-color: #edfaff9b;
+  margin-top: 0px;
 }
 
 svg {

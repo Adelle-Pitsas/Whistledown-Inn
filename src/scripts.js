@@ -51,8 +51,6 @@ const emptyFieldsError = document.querySelector('.empty-fields-error')
 const loadingCircle = document.getElementById('loadingCircle')
 const welcomeMessage = document.getElementById('welcomeMessage')
 
-
-
 // ------GLOBAL VARIABLES------
 const store = {
   hotel: new Hotel(),
@@ -74,9 +72,11 @@ function initializeApp(event) {
       store.currentCustomer = getCustomer()
       initializeEventListeners()
       store.currentDate = getCurrentDate()
-      console.log(store.currentDate)
+      setMinDate(store.currentDate)
     })
 }
+
+
 //------ NETWORK REQUEST FUNCTIONS------
 function createNewBooking(userID, date, roomNumber, event) {
   console.log(date)
@@ -310,6 +310,10 @@ function hide(element) {
 
 function show(element) {
   element.classList.remove('hidden')
+}
+
+function setMinDate(date) {
+  datePicker.min = date.split('/').join('-')
 }
 
 function formatDate(date) {

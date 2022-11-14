@@ -10,6 +10,14 @@ import Customer from './Customer';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import './images/BrigertonHouse.png'
+import './images/alert-icon.png'
+import './images/bedroomImage.png'
+import './images/Whistledown-logo.png'
+import './images/silouette.png'
+import './images/bee-image.png'
+import './images/github-icon.png'
+
 //------QUERY SELECTORS------
 const upcomingBookingDropDown = document.getElementById('upcomingBookingDropDown')
 const upcomingBookings = document.getElementById('upcomingBookings')
@@ -151,11 +159,7 @@ function parseUsername(username) {
 }
 
 function parsePassword(password) {
-  if(password === 'overlook2021') {
-    return true
-  } else {
-    return false
-  }
+  return password === 'overlook2021'
 }
 
 function setUpCustomerDashboard(id) {
@@ -249,7 +253,7 @@ function displayAvailableRooms(rooms) {
       availableRooms.innerHTML+= `
         <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
-            <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
+            <img src="images/bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
             <p class="room-number">Room Number: ${room.number}</p>

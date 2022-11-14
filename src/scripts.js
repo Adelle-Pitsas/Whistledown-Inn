@@ -12,11 +12,14 @@ import Customer from './Customer';
 import './images/turing-logo.png'
 import './images/BrigertonHouse.png'
 import './images/alert-icon.png'
-import './images/bedroomImage.png'
 import './images/Whistledown-logo.png'
 import './images/silouette.png'
 import './images/bee-image.png'
 import './images/github-icon.png'
+import './images/junior.png'
+import './images/single-bedroom.png'
+import './images/residential-bedroom.png'
+import './images/suite-bedroom.png'
 
 //------QUERY SELECTORS------
 const upcomingBookingDropDown = document.getElementById('upcomingBookingDropDown')
@@ -62,6 +65,14 @@ const store = {
   currentCustomer: new Customer(),
   currentDate: new Date()
 }
+
+const images = {
+  "junior suite":  './images/junior.png',
+  "single room": './images/single-bedroom.png',
+  "residential suite": './images/residential-bedroom.png',
+  "suite": './images/suite-bedroom.png'
+}
+
 // -------WINDOW LOAD FUNCTIONS------
 function initializeApp(customerID) {
   getAllData(customerID)
@@ -261,7 +272,7 @@ function displayAvailableRooms(rooms) {
       availableRooms.innerHTML+= `
         <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
-            <img src="images/bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
+            <img src=${images[room.roomType]} class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
             <p class="room-info room-number">Room Number: ${room.number}</p>
@@ -323,4 +334,8 @@ function getCurrentDate() {
   let month = date.getMonth() + 1;
   let day = date.getDate();
   return `${year}/${month}/${day}`
+}
+
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length)
 }

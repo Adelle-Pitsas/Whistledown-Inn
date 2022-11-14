@@ -31,4 +31,10 @@ describe('Customer', () => {
     expect(newCustomer1.name).to.equal("Leatha Ullrich")
     expect(newCustomer2.name).to.equal("Rocio Schuster")
   })
+
+  it('should create a customer username', () => {
+    const username = newCustomer1.createUsername(1)
+
+    expect(username).to.equal('customer1')
+  })
 });

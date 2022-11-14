@@ -1,3 +1,13 @@
+/* @font-face {
+  font-family: Garamond;
+  src: url('../../dist/EBGaramond-Italic-VariableFont_wght.ttf') format(Garamond);
+} */
+
+* {
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+  /* font-family: DancingScript; */
+}
+
 html {
   position: relative;
   margin: 0px;
@@ -36,6 +46,71 @@ header {
   left: 45%
 }
 
+/* ----Login---- */
+
+.user-login {
+  left: calc(50% - 225px);
+  top: calc(50% - 225px);
+  width: 60%;
+  height: 40%;
+  z-index: 9999;
+  text-align: center;
+  background-color: #cfb975a7;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-welcome {
+  font-size: 30px;
+  margin-bottom: 0;
+}
+
+.login-instruction {
+  font-size: 22px;
+}
+
+.user-input-password {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.user-input-id {
+  margin-top: 20px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.unmatched-credentials-error,
+.empty-fields-error {
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+  color: red;
+  background-color: #edfaff9b;
+}
+
+svg {
+  /* width: 100px; */
+  overflow: visible;
+}
+
+svg circle {
+  transform-origin: 50px 50px;
+  animation: spin 1.0s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 /* ----Main Content---- */
 
@@ -52,7 +127,7 @@ main {
   padding-bottom: 300px;
   margin-top: 0;
   margin-bottom: 0;
-  background-image: url(/Users/adelle_pitsas/turing_work/2mod/projects/overlook-hotel/dist/BrigertonHouse.png);
+  background-image: url('../images/BrigertonHouse.png');
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -119,6 +194,7 @@ main {
   font-size: 18px;
 }
 
+.user-login-button,
 .submit-search-button {
   height: 40px;
   width: 100px;
@@ -130,6 +206,7 @@ main {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
+.user-login-button:hover,
 .submit-search-button:hover {
   filter: brightness(150%);
 }
@@ -442,7 +519,7 @@ footer {
   display: none;
 }
 
-.overlay {
+.overlay-main {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -455,10 +532,3 @@ footer {
   z-index: 1;
 }
 
-/* .blur-filter {
-  -webkit-filter: blur(4px);
-  -moz-filter: blur(4px);
-  -o-filter: blur(4px);
-  -ms-filter: blur(4px);
-  filter: blur(4px);
-} */

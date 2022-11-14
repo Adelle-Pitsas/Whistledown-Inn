@@ -10,6 +10,14 @@ import Customer from './Customer';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import './images/BrigertonHouse.png'
+import './images/alert-icon.png'
+import './images/bedroomImage.png'
+import './images/Whistledown-logo.png'
+import './images/silouette.png'
+import './images/bee-image.png'
+import './images/github-icon.png'
+
 //------QUERY SELECTORS------
 const upcomingBookingDropDown = document.getElementById('upcomingBookingDropDown')
 const upcomingBookings = document.getElementById('upcomingBookings')
@@ -20,8 +28,7 @@ const previousBookings = document.getElementById('previousBookings')
 const previousDropDownArrow = document.querySelector('.previous-dropdown-arrow')
 const previousBookingContainer = document.getElementById('previousDropdownContainer')
 
-
-const allContent = document.querySelector('.all-content')
+const customerContent = document.querySelector('.main')
 const cumulativeCost = document.getElementById('cumulativeCost')
 const datePicker = document.getElementById('datePicker')
 const roomTypePicker = document.getElementById('roomTypeSelect')
@@ -31,8 +38,19 @@ const availableRooms = document.getElementById('availableRooms')
 const availableRoomsHeader = document.getElementById('availableRoomsHeader')
 const bookRoomSuccessPopup = document.getElementById('bookRoomSuccess')
 const noDateAvailablePopup = document.getElementById('noDatesAvailable')
-const networkErrorPopup = document.getElementById('networkError')
-const overlay = document.querySelector('.overlay')
+
+const networkErrorPopup =document.getElementById('networkError')
+const overlayMain = document.querySelector('.overlay-main')
+const overlayLogin = document.querySelector('.overlay-login')
+const userLoginForm = document.getElementById('userLoginForm')
+const usernameInput = document.getElementById('userInputID');
+const passwordInput = document.getElementById('userInputPassword');
+const userLoginButton = document.getElementById('userLoginButton')
+const unmatchedCredentialsError = document.querySelector('.unmatched-credentials-error')
+const emptyFieldsError = document.querySelector('.empty-fields-error')
+const loadingCircle = document.getElementById('loadingCircle')
+const welcomeMessage = document.getElementById('welcomeMessage')
+
 
 
 // ------GLOBAL VARIABLES------
@@ -42,11 +60,11 @@ const store = {
   bookingData: [],
   roomData: [],
   customersData: [],
-  currentCustomer: new Customer()
+  currentCustomer: new Customer(),
+  currentDate: new Date()
 }
-
 // -------WINDOW LOAD FUNCTIONS------
-function initializeApp() {
+function initializeApp(event) {
   getAllData()
     .then((data) => {
       store.roomData = data.roomsData
@@ -55,9 +73,8 @@ function initializeApp() {
       store.customerRepo = new CustomerRepository(data.customersData)
       store.currentCustomer = getCustomer()
       initializeEventListeners()
-      setUpCustomerDashboard()
-      // console.log(store.bookingData)
-
+      store.currentDate = getCurrentDate()
+      console.log(store.currentDate)
     })
 }
 //------ NETWORK REQUEST FUNCTIONS------
@@ -69,34 +86,35 @@ function createNewBooking(userID, date, roomNumber, event) {
       console.log(data.newBooking)
       console.log(event)
       store.hotel.addNewBooking(data.newBooking)
-      store.hotel.getCustomerTotalCost(userID, getCurrentDate())
-      setUpCustomerDashboard()
+      store.hotel.getCustomerTotalCost(userID, store.currentDate)
+      getCumulativeCost(store.currentCustomer);
+      getRoomTypeDisplay(store.hotel.getRoomTypes())
       removeBookedRoom(event.target.parentNode)
       show(bookRoomSuccessPopup)
       bookRoomSuccessPopup.focus()
-      show(overlay)
+      show(overlayMain)
     })
     .catch((err) => {
       console.error('CATCH ERROR', err);
       show(networkErrorPopup)
+      show(overlayMain)
       networkErrorPopup.focus()
-      show(overlay)
     })
 }
-
 
 // ------EVENT LISTENERS------
 window.addEventListener('load', initializeApp)
 
 function initializeEventListeners() {
-  
-  upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
 
-  submitButton.addEventListener('click', searchFilter)
-
-  previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
+  userLoginButton.addEventListener('click', checkEmptyInputs)
 
 }
+upcomingBookingDropDown.addEventListener('click', toggleUpcomingBookingsDisplay)
+
+submitButton.addEventListener('click', searchFilter)
+
+previousBookingDropDown.addEventListener('click', togglePreviousBookingsDisplay)
 
 availableRooms.addEventListener('click', bookRoom)
 
@@ -110,13 +128,60 @@ window.addEventListener('click', closeMessage)
 
 
 // ------EVENT HANDLERS/FUNCTIONS------
-function setUpCustomerDashboard() {
-  getCumulativeCost();
+function checkEmptyInputs(event) {
+  event.preventDefault()
+  if(!usernameInput.value || !passwordInput.value) {
+    hide(unmatchedCredentialsError)
+    show(emptyFieldsError)
+  } else {
+    checkValidInputs()
+  }
+}
+
+function checkValidInputs() {
+  const usernameID = parseUsername(usernameInput.value)
+  const isValidPassword = parsePassword(passwordInput.value)
+  if (usernameID && isValidPassword) {
+    hide(emptyFieldsError)
+    hide(unmatchedCredentialsError)
+    show(loadingCircle)
+    setTimeout(() => {
+      setUpCustomerDashboard(usernameID)
+      hide(loadingCircle)
+      }, 2000)
+    
+  } else {
+    hide(emptyFieldsError)
+    show(unmatchedCredentialsError)
+  }
+}
+
+
+function parseUsername(username) {
+  const foundUser = store.customerRepo.allCustomers.find((customer) => {
+    return customer.username === username
+  })
+  if(foundUser) {
+    return foundUser.id
+  }
+}
+
+function parsePassword(password) {
+  return password === 'overlook2021'
+}
+
+function setUpCustomerDashboard(id) {
+  getCustomer(id)
+  welcomeMessage.innerText = `Welcome ${store.currentCustomer.name}!`
+  show(welcomeMessage)
+  hide(userLoginForm)
+  show(customerContent)
+  getCumulativeCost(store.currentCustomer);
   getRoomTypeDisplay(store.hotel.getRoomTypes());
 }
 
-function getCumulativeCost() {
-  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(store.currentCustomer.id, getCurrentDate())}`
+function getCumulativeCost(currentCustomer) {
+  cumulativeCost.innerText = `$${store.hotel.getCustomerTotalCost(currentCustomer.id, store.currentDate)}`
 }
 
 function toggleUpcomingBookingsDisplay() {
@@ -124,7 +189,7 @@ function toggleUpcomingBookingsDisplay() {
   upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
   if(upcomingBookings.classList.contains('bookings-open')) {
     upcomingBookingDropDown.ariaExpanded = 'true';
-    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, getCurrentDate()), upcomingBookingContainer)
+    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, store.currentDate), upcomingBookingContainer)
   } else {
     upcomingBookingDropDown.ariaExpanded = 'false';
     upcomingBookingContainer.innerHTML = ''
@@ -136,7 +201,7 @@ function togglePreviousBookingsDisplay() {
   previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
   if(previousBookings.classList.contains('bookings-open')) {
     previousBookingDropDown.ariaExpanded = 'true';
-    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, getCurrentDate()), previousBookingContainer)
+    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, store.currentDate), previousBookingContainer)
   } else {
     previousBookingDropDown.ariaExpanded = 'false';
     previousBookingContainer.innerHTML = ''
@@ -181,7 +246,6 @@ function searchFilter() {
     displayAvailableRooms(store.hotel.filterByRoomType(date, roomTypePicker.value))
   } else {
     show(chooseDateError)
-    // chooseDateError.focus() 
   }
 }
 
@@ -197,7 +261,7 @@ function displayAvailableRooms(rooms) {
       availableRooms.innerHTML+= `
         <section class="room-card" id="cardNumber:${index}" tabindex="0">
           <figure class="picture">
-            <img src="bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
+            <img src="images/bedroomImage.png" class="bedroom-image" alt="brightly lit victorian bedroom">
           </figure>
           <section class="room-details">
             <p class="room-info room-number">Room Number: ${room.number}</p>
@@ -231,13 +295,13 @@ function displayApology() {
 function closeMessage(event) {
   if(event.target.classList.contains('dismiss')) {
   hide(event.target.parentNode)
-  hide(overlay)
+  hide(overlayMain)
   }
 }
 
 // ------UTILITY FUNCTIONS------
-function getCustomer() {
-  return store.customerRepo.findCustomerByID(39)
+function getCustomer(id) {
+  store.currentCustomer = store.customerRepo.findCustomerByID(id)
 }
 
 function hide(element) {
@@ -253,9 +317,9 @@ function formatDate(date) {
 }
 
 function getCurrentDate() {
-  const date = new Date()
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  let day = date.getDate()
+  const date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
   return `${year}/${month}/${day}`
 }

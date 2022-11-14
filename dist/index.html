@@ -72,13 +72,13 @@
                 <!-- Dynamically created options -->
               </label>
             <button class="submit-search-button" id="submitSearchButton">Search</button>
-            </section>
+          </section>
+          <svg id="roomsLoadingCircle" class="hidden" width="100" height="100">
+            <circle cx="50" cy="50" r="20" stroke="#273135" stroke-dasharray="100" stroke-width="6" fill="transparent"/>
+          </svg>
           <section class="available-rooms-container" id="availableRoomsContainer">
             <h2 class="available-rooms-header hidden" id="availableRoomsHeader">Available Rooms</h2>
             <div class="available-rooms" id="availableRooms">
-              <svg id="roomsLoadingCircle" class="hidden" width="100" height="100">
-                <circle cx="50" cy="50" r="20" stroke="#273135" stroke-dasharray="100" stroke-width="6" fill="transparent"/>
-              </svg>
               <!-- Dynamically created room cards go here  -->
             </div>
           </section>
@@ -92,6 +92,7 @@
     </footer>
   </section>
   <div class="overlay-main hidden"></div>
+
   <section class="book-room-success-popup hidden" tabindex="0" id="bookRoomSuccess">
     <img src="images/silouette.png" class="wistledown-silhouette" alt="Lady Wistledown's silhouette">
     <div class="confirmation-text">
@@ -101,7 +102,7 @@
     <button class="dismiss" id="successDismissButton">Dismiss</button>
   </section>
   <section class="no-dates-available-popup hidden" id="noDatesAvailable" tabindex="0">
-    <img src="images/bee-image.png" class="image of a bee" alt="image of a bee">
+    <img src="images/bee-image.png" class="image-bee" alt="image of a bee">
     <div class="no-date-text">
       <p>SO SORRY!!</p>
       <p>There are no rooms available for the dates you selected</p>

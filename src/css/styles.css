@@ -37,7 +37,7 @@ header {
 .logo {
   height: 250px;
   position: absolute;
-  left: 45%
+  left: 44%
 }
 
 /* ----Login---- */
@@ -460,6 +460,10 @@ figure {
   z-index: 9999;
   top: calc(50% - 225px);
   left:calc(50% - 225px);
+}
+
+.image-bee {
+  height: 125px;
 }
 
 .alert-icon {

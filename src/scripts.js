@@ -242,6 +242,8 @@ function getRoomTypeDisplay(roomTypes) {
 function searchFilter() {
   if(datePicker.value && roomTypePicker.value==='Any') {
     const date = formatDate(datePicker.value)
+    availableRooms.innerHTML = ''
+    hide(availableRoomsHeader)
     show(roomsLoadingCircle)
     hide(chooseDateError)
     setTimeout(() => {
@@ -250,6 +252,8 @@ function searchFilter() {
       }, 1000)
   } else if(datePicker.value && roomTypePicker !== 'Any') {
     const date = formatDate(datePicker.value)
+    availableRooms.innerHTML = ''
+    hide(availableRoomsHeader)
     show(roomsLoadingCircle)
     hide(chooseDateError)
     setTimeout(() => {
@@ -264,9 +268,12 @@ function searchFilter() {
 function displayAvailableRooms(rooms) {
   if(!rooms.length) {
     displayApology()
-  } else {
-    show(availableRoomsHeader)
+    show(overlayMain)
     availableRooms.innerHTML = ''
+    hide(availableRoomsHeader)
+  } else {
+    availableRooms.innerHTML = ''
+    show(availableRoomsHeader)
     availableRooms.ariaExpanded = true
     rooms.forEach((room, index) => {
       availableRooms.innerHTML+= `

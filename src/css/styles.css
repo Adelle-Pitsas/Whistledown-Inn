@@ -147,6 +147,7 @@ main {
 
 .booking-banner {
   width: 60%;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -223,7 +224,7 @@ main {
   margin: 32px 8px;
   background-color: #dfd0b5;
   border-radius: 5px;
-  box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
+  box-shadow: 1px 5px 5px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
 figure {
@@ -248,14 +249,27 @@ figure {
   width: 100%
 }
 
+.room-info{ 
+  height: 15px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
 .book-room-button {
-  height: 30px;
-  width: 150px;
+  height: 35px;
+  width: 175px;
   border-radius: 5px;
   background-color: #273135;
   color: aliceblue;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 16px;
   cursor: pointer;
+}
+
+.book-room-button:hover {
+  filter: brightness(150%);
 }
 
 /* ----User Info---- */
@@ -287,6 +301,16 @@ figure {
   box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%);
 }
 
+.cumulative-cost-header {
+  font-size: 22px;
+}
+
+.cumulative-cost {
+  font-size: 20px;
+  margin-bottom: 25px;
+  margin-top: 0px;
+}
+
 .booking-info {
   display: flex;
   width: 100%;
@@ -296,9 +320,7 @@ figure {
 
 .previous-bookings-dropdown,
 .upcoming-bookings-dropdown {
-  /* all: unset; */
   cursor: pointer;
-  position: relative;
   margin-top: 45px;
   border-radius: 10px;
   height: 50px;
@@ -410,7 +432,12 @@ figure {
 /* ----Pop Ups---- */
 .choose-date-error {
   color: red;
-  font-size: 14px;
+  padding: 7px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.644);
+  font-size: 18px;
 }
 
 .network-error-popup,

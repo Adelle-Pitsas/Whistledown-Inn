@@ -1,5 +1,3 @@
-
-
 // ------- GET Requests -------
 
 const fetchData = (url) => {
@@ -15,8 +13,8 @@ const fetchData = (url) => {
 }
 
 const networkRequests = {
-  getAllCustomers: () => {
-    return fetchData('http://localhost:3001/api/v1/customers')
+  getCustomer: (id) => {
+    return fetchData(`http://localhost:3001/api/v1/customers/${id}`)
   },
  getAllRooms: () => {
     return fetchData('http://localhost:3001/api/v1/rooms')
@@ -26,30 +24,24 @@ const networkRequests = {
   }
 }
 
-function getAllData() {
+function getAllData(id) {
   return Promise.all([
-    networkRequests.getAllCustomers(),
+    networkRequests.getCustomer(id),
     networkRequests.getAllRooms(),
     networkRequests.getAllBookings()
   ])
   .then((data) => {
     return {
-    customersData: data[0].customers,
+    customerData: data[0],
     roomsData: data[1].rooms,
     bookingsData: data[2].bookings
     }
   })
-  .catch((err) => console.error(err))
 } 
 
-const postURL = "http://localhost:3001/a/v1/bookings"
+const postURL = "http://localhost:3001/api/v1/bookings"
 
 function postBooking(userID, date, roomNumber) {
-  // console.log(userID.toString())
-  // console.log(date)
-  // console.log(Number(roomNumber))
-  // console.log(typeof roomNumber)
-  // const newNumber = Number
   const bookingPost = {
     "userID": userID,
     "date": date,

@@ -1,11 +1,5 @@
-/* @font-face {
-  font-family: Garamond;
-  src: url('../../dist/EBGaramond-Italic-VariableFont_wght.ttf') format(Garamond);
-} */
-
 * {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-  /* font-family: DancingScript; */
 }
 
 html {
@@ -36,14 +30,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* that will need to change when I add more */
   background-color: #cfb975a7;
 }
 
 .logo {
   height: 250px;
   position: absolute;
-  left: 45%
+  left: 44%
 }
 
 /* ----Login---- */
@@ -51,8 +44,8 @@ header {
 .user-login {
   left: calc(50% - 225px);
   top: calc(50% - 225px);
-  width: 60%;
-  height: 40%;
+  width: 600px;
+  height: 375px;
   z-index: 9999;
   text-align: center;
   background-color: #cfb975a7;
@@ -88,15 +81,15 @@ header {
 
 .unmatched-credentials-error,
 .empty-fields-error {
-  width: 50%;
+  width: 200px;
   padding: 10px;
   border-radius: 5px;
   color: red;
   background-color: #edfaff9b;
+  margin-top: 0px;
 }
 
 svg {
-  /* width: 100px; */
   overflow: visible;
 }
 
@@ -145,6 +138,8 @@ main {
   display: flex;
   width: 100%;
 }
+
+/* ---booking section */
 
 .booking-section {
   display: flex;
@@ -239,6 +234,7 @@ main {
 
 figure {
   width: 100%;
+  height: 200px;
   overflow: hidden;
   margin: 0;
   margin-bottom: 3px;
@@ -320,6 +316,8 @@ figure {
   margin-bottom: 25px;
   margin-top: 0px;
 }
+
+/* ---drop down info--- */
 
 .booking-info {
   display: flex;
@@ -467,6 +465,10 @@ figure {
   left:calc(50% - 225px);
 }
 
+.image-bee {
+  height: 125px;
+}
+
 .alert-icon {
   width: 50px;
   height: 50px;
@@ -501,6 +503,8 @@ figure {
 .dismiss:hover {
   filter: brightness(110%);
 }
+
+/* ---footer--- */
 
 footer {
   height: 200px;

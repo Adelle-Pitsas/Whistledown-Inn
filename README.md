@@ -69,11 +69,11 @@ Booking a new room
 ## About the people
 
 ### Contributors
-Adelle Pitsas - apitsas4@gmail.com - LinkedIn - GitHub
+Adelle Pitsas - apitsas4@gmail.com - [LinkedIn](https://www.linkedin.com/in/adelle-pitsas-461503183/) - [GitHub](https://github.com/Adelle-Pitsas)
 
 ### Instructors
-- Project manager - Heather Faerber
-- Module 2 instructor - Cass Torske
-- Module 2 instructor - Nick Teets
+- Project manager - [Heather Faerber](https://github.com/hfaerber)
+- Module 2 instructor - [Cass Torske](https://github.com/CassandraGoose)
+- Module 2 instructor - [Nick Teets](https://github.com/nicktu12)
 
 

@@ -1,4 +1,10 @@
-# Whistledown Inn
+<div style="text-align: center;">
+![Whistledown-logo](https://user-images.githubusercontent.com/108096652/201963460-8b218cd3-71b0-4422-b76f-ace6a0e02ce0.png)
+</div>
+  
+  
+<h1 style="text-align: center;"> Whistledown Inn! </h1>
+
 A one stop shop for managing bookings at your favorite mysterious victorian getaway. Users can login to their portal, view their upcoming and past bookings, review their expenditures, and make new bookings.
 
 
@@ -66,8 +72,8 @@ Booking a new room
 Adelle Pitsas - apitsas4@gmail.com - LinkedIn - GitHub
 
 ### Instructors
-Project manager - Heather Faerber
-Module 2 instructor - Cass Torske
-Module 2 instructor - Nick Teets
+- Project manager - Heather Faerber
+- Module 2 instructor - Cass Torske
+- Module 2 instructor - Nick Teets
 
 

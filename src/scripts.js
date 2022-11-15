@@ -198,11 +198,11 @@ function toggleUpcomingBookingsDisplay() {
   upcomingBookings.classList.toggle('bookings-open');
   upcomingDropDownArrow.classList.toggle('upcoming-dropdown-arrow-open');
   if(upcomingBookings.classList.contains('bookings-open')) {
-    upcomingBookingContainer.ariaExpanded = 'true';
-    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, store.currentDate), upcomingBookingContainer);
+    upcomingBookingDropDown.ariaExpanded = 'true';
+    displayCustomerBookings(upcomingBookingContainer, store.hotel.findUpcomingCustomerBookings(store.currentCustomer.id, store.currentDate), upcomingBookingContainer)
   } else {
-    upcomingBookingContainer.ariaExpanded = 'false';
-    upcomingBookingContainer.innerHTML = '';
+    upcomingBookingDropDown.ariaExpanded = 'false';
+    upcomingBookingContainer.innerHTML = ''
   }
 };
 
@@ -211,11 +211,11 @@ function togglePreviousBookingsDisplay() {
   previousBookings.classList.toggle('bookings-open');
   previousDropDownArrow.classList.toggle('previous-dropdown-arrow-open');
   if(previousBookings.classList.contains('bookings-open')) {
-    previousBookingContainer.ariaExpanded = 'true';
-    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, store.currentDate), previousBookingContainer);
+    previousBookingDropDown.ariaExpanded = 'true';
+    displayCustomerBookings(previousBookingContainer, store.hotel.findPreviousCustomerBookings(store.currentCustomer.id, store.currentDate), previousBookingContainer)
   } else {
-    previousBookingContainer.ariaExpanded = 'false';
-    previousBookingContainer.innerHTML = '';
+    previousBookingDropDown.ariaExpanded = 'false';
+    previousBookingContainer.innerHTML = ''
   }
 };
 

@@ -3,7 +3,6 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-import CustomerRepository from './CustomerRepository';
 import Hotel from './Hotel';
 import { getAllData, postBooking } from './Network-requests';
 import Customer from './Customer';

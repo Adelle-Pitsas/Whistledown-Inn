@@ -223,7 +223,7 @@ function displayCustomerBookings(containerElement, bookings, bookingContainer) {
     <div class="booking">
       <p class="booking-date">${booking.date}</p>
       <p class="booking-room">${booking.roomNumber}</p>
-      <p class="booking-cost">$${store.hotel.getRoomCost(booking.roomNumber)}
+      <p class="booking-cost">$${store.hotel.getRoomCost(booking.roomNumber).toFixed(2)}
     </div>
     `
   })
@@ -285,7 +285,7 @@ function displayAvailableRooms(rooms) {
             <p class="room-info room-type">Type: ${room.roomType}</p>
             <p class="room-info bed-size">Bed Size: ${room.bedSize}</p>
             <p class="room-info number-of-beds">Number of beds: ${room.numBeds}</p>
-            <p class="room-info cost-per-night">Cost: $${room.costPerNight}</p>
+            <p class="room-info cost-per-night">Cost: $${room.costPerNight.toFixed(2)}</p>
           </section>
           <button class="book-room-button" id="${room.number}">BOOK ROOM</button>
         </section>

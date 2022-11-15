@@ -1,5 +1,3 @@
-
-
 // ------- GET Requests -------
 
 const fetchData = (url) => {
@@ -33,7 +31,6 @@ function getAllData(id) {
     networkRequests.getAllBookings()
   ])
   .then((data) => {
-    console.log(data)
     return {
     customerData: data[0],
     roomsData: data[1].rooms,
@@ -45,11 +42,6 @@ function getAllData(id) {
 const postURL = "http://localhost:3001/api/v1/bookings"
 
 function postBooking(userID, date, roomNumber) {
-  // console.log(userID.toString())
-  // console.log(date)
-  // console.log(Number(roomNumber))
-  // console.log(typeof roomNumber)
-  // const newNumber = Number
   const bookingPost = {
     "userID": userID,
     "date": date,

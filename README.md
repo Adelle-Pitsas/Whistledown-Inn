@@ -1,9 +1,9 @@
-<div style="text-align: center;">
-![Whistledown-logo](https://user-images.githubusercontent.com/108096652/201963460-8b218cd3-71b0-4422-b76f-ace6a0e02ce0.png)
-</div>
+<p align="center">
+  <img width="175" height="175" src='https://user-images.githubusercontent.com/108096652/201963460-8b218cd3-71b0-4422-b76f-ace6a0e02ce0.png'>
+ </p>
   
   
-<h1 style="text-align: center;"> Whistledown Inn! </h1>
+<h1 align="center"> Whistledown Inn </h1>
 
 A one stop shop for managing bookings at your favorite mysterious victorian getaway. Users can login to their portal, view their upcoming and past bookings, review their expenditures, and make new bookings.
 
@@ -57,7 +57,7 @@ Booking a new room
 #### Wins:
 - Learned some cool CSS to increase my UI (overlays, popups, dropdowns, animations)
 - I had some fun planning the class logic and deciding where pieces of the logic puzzle should go
-- Learned some animations with the login loading screen!
+- Nitpicking user actions for seamless user interactions
 - Successful (and relatively painless) `get` and `post` requests
 - Fixing, making note of, and solving bugs as they came up
 

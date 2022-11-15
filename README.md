@@ -23,6 +23,17 @@ This project was built with:
 I'm a student at Turing School of Software and Design. This project is the final assigment for Turing's second module, which means this project was completed about 3 months into my software development career.
 
 ### The App
+![Screen Shot 2022-11-15 at 9 04 28 AM](https://user-images.githubusercontent.com/108096652/201939700-1a154d27-51fd-4c45-8775-f14ee65a7441.png)
+The login page
+
+![Screen Shot 2022-11-15 at 9 04 49 AM](https://user-images.githubusercontent.com/108096652/201939754-a9503ddf-fa70-4090-a03c-dc4feebe4ac3.png)
+The user dashboard
+
+![Screen Shot 2022-11-15 at 9 05 07 AM](https://user-images.githubusercontent.com/108096652/201939789-0938daab-ba04-44b2-a838-052930ef0db1.png)
+All customer booking information
+
+![Screen Shot 2022-11-15 at 9 06 04 AM](https://user-images.githubusercontent.com/108096652/201939810-1b0aa6b7-b9e8-4f8d-aa37-85193dd7d17e.png)
+Booking a new room
 
 
 ## Getting Started
